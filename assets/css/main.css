@@ -68,7 +68,7 @@
 	}
 
 	body {
-		background: #fff;
+        background-color: #011330;
 		overflow: hidden;
 	}
 
@@ -172,30 +172,34 @@
 /* BG */
 
 	#bg {
-		-moz-animation: bg 30s forwards;
-		-webkit-animation: bg 30s forwards;
-		-ms-animation: bg 30s forwards;
-		animation: bg 30s forwards;		
+
+		-moz-animation: bg 5s reverse;
+		-webkit-animation: bg 5s reverse;
+		-ms-animation: bg 5s reverse;
+		animation: bg 5s reverse;
 		animation-iteration-count: 1;
 
 		-moz-backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
 		backface-visibility: hidden;
-		-moz-transform: translate3d(-200,0,0);
+
+		-moz-transform: translate3d(-400,0,0);
 		-webkit-transform: translate3d(-200,0,0);
 		-ms-transform: translate3d(-200,0,0);
-		transform: translate3d(-200,0,0);
+		transform: translate3d(-400,0,0);
+
 	/* Set your background with this */
 
-		background: #348cb2 url("images/bg.jpg") bottom left;
-		//background-repeat: repeat-x;
-		height: 100%;
+		background: url("images/bg.jpg") bottom left;
+		background-repeat: repeat-x;
+        height: 100%;
 		left: 0;
 		opacity: 1;
 		position: fixed;
 		top: 0;
 	}
+
 
 	@-moz-keyframes bg {
 		0% {
@@ -265,6 +269,7 @@
 		background-size: 2250px auto;
 		width: 6750px;
 	}
+
 
 /* Overlay */
 
@@ -492,7 +497,7 @@
 		}
 	}
 
-	#header {
+    .general {
 		-moz-animation: header 1s 2.25s forwards;
 		-webkit-animation: header 1s 2.25s forwards;
 		-ms-animation: header 1s 2.25s forwards;
@@ -515,14 +520,21 @@
 		width: 90%;
 	}
 
-		#header h1 {
+		.general h1 {
 			font-size: 4.35em;
 			font-weight: 900;
 			letter-spacing: -0.035em;
 			line-height: 1em;
 		}
 
-		#header p {
+        .general h2 {
+			font-size: 2.35em;
+			font-weight: 900;
+			letter-spacing: -0.035em;
+			line-height: 1em;
+		}
+
+        .general p {
 			font-size: 1.25em;
 			margin: 0.75em 0 0.25em 0;
 			opacity: 0.75;
@@ -670,6 +682,8 @@
 				#header nav a span {
 					display: none;
 				}
+
+
 
 /* Footer */
 

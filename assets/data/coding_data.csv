@@ -1,0 +1,28 @@
+id,value,color
+ori,
+ori.Software,
+ori.Software.General
+ori.Software.General.Photoshop,1.5,#2E2575
+ori.Software.General.MS Office, 3,#E54F24
+ori.Software.General.Latex,2.5, #563B7E
+ori.Software.Scientific,
+ori.Software.Scientific.Pymol,3,#00A10B
+ori.Software.Scientific.Coot,1,#1169AE
+ori.Software.Scientific.Avogadro, 2.5,#563B7E
+ori.Software.Scientific.Chemsketch, 2.5,#F6854D
+ori.Software.Scientific.Knime,2,#D6BA33
+ori.Programming,
+ori.Programming.objectiveLanguage
+ori.Programming.objectiveLanguage.Java,3, #FF1A00
+ori.Programming.objectiveLanguage.C#, 3, #8A00AD
+ori.Programming.objectiveLanguage.C++, 1.5, #0073AD
+ori.Programming.script_Language
+ori.Programming.script_Language.Python, 3, #00A10B
+ori.Programming.script_Language.C, 1.5, #0857AD
+ori.Programming.script_Language.R, 1, #FF8F00
+ori.Programming.script_Language.perl, 0.5, #00CFFF
+ori.Programming.web,
+ori.Programming.web.HTML, 3, #FF4D00
+ori.Programming.web.CSS, 3, #4A00FF
+ori.Programming.web.JavaScript, 3, #FF0030
+ori.Programming.web.php, 0.5, #6A00FF

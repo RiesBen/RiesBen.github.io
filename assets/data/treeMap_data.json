@@ -1,0 +1,41 @@
+{
+  "name": "start",
+  "children": [
+    {
+      "name": "Biochemistry",
+      "size": 2,
+      "children": [
+          {
+            "name": "Synthesis of bio oligomers",
+            "size": 1
+          },
+          {
+            "name": "Structure Biology",
+            "size": 1
+          }
+        ]
+    },
+    {
+      "name": "Bioinformatics",
+      "size": 4,
+      "children": [
+        {
+          "name": "Drug Design",
+          "size": 1
+        },
+        {
+          "name": "Parallel Computing",
+          "size": 1
+        },
+        {
+          "name": "Visualisation of Biological Data",
+          "size": 1
+        },
+        {
+          "name": "Datamanagment for Biological Data",
+          "size": 1
+        }
+      ]
+    }
+  ]
+}
