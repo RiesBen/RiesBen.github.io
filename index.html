@@ -15,7 +15,7 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
-	<body class="loading">
+	<body class="loading" id="main">
 		<div id="wrapper">
 			<div id="bg"></div>
 			<!-- <div id="overlay"></div> -->
@@ -27,9 +27,9 @@
 						<nav>
 							<h2>about me</h2>
 							<ul>
-								<li><a href="science.html" class="icon fa-flask"><span class="label">Science Interest</span></a></li>
-								<li><a href="coding.html" class="icon fa-code"><span class="label">Coding</span></a></li>
-								<li><a href="hobbies.html" class="icon fa-coffee"><span class="label">Hobby</span></a></li>
+								<li><a href="science.html" class="icon fa-flask fa-1g"><span class="label">Science Interest</span></a></li>
+								<li><a href="coding.html" class="icon fa-code fa-1g"><span class="label">Coding</span></a></li>
+								<li><a href="hobbies.html" class="icon fa-coffee fa-1g"><span class="label">Hobby</span></a></li>
 							</ul>
 							<h2 >contact</h2>
 							<ul>
@@ -50,6 +50,9 @@
 		<script>
                 window.onload = function () {
                     document.body.className = '';
+                    var spinner = document.createElement("P")
+                    spinner.setAttribute("class","fa-li fa fa-spinner fa-spin")
+                    document.getElementById("main").appendChild(spinner)
                 }
                 window.ontouchmove = function () {
                     return false;

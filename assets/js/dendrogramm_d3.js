@@ -122,19 +122,6 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
         .style("stroke-dasharray","20,1")
         .style("stroke","black");
 
-    // The moving ball
-    var ballG = svg.insert("g")
-        .attr("class","ballG")
-        .attr("transform", "translate(" + 1100 + "," + height/2 + ")");
-    ballG.insert("circle")
-        .attr("class","shadow")
-        .style("fill","steelblue")
-        .attr("r", 5);
-    ballG.insert("text")
-        .style("text-anchor", "middle")
-        .attr("dy",5)
-        .text("0.0");
-
     // Animation functions for mouse on and off events.
     d3.selectAll(".node--leaf-g")
         .on("mouseover", handleMouseOver)
@@ -146,21 +133,6 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
         leafG.select("rect")
             .attr("stroke","#4D4D4D")
             .attr("stroke-width","2");
-
-
-        var ballGMovement = ballG.transition()
-            .duration(400)
-            .attr("transform", "translate(" + (d.y
-                + xScale(d.data.value) + 90) + ","
-                + (d.x + 1.5) + ")");
-
-        ballGMovement.select("circle")
-            .style("fill", d.data.color)
-            .attr("r", 18);
-
-        ballGMovement.select("text")
-            .delay(300)
-            .text(Number(d.data.value).toFixed(1));
     }
     function handleMouseOut() {
         var leafG = d3.select(this);

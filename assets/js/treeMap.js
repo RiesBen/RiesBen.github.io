@@ -7,6 +7,10 @@ var box = document.getElementById('graph'),
     width = 0.9*box.clientWidth,
     height = 1.0*box.clientHeight;
 
+var dict = d3.json("assets/data/treeMap_data.json")
+
+
+
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
     color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
     format = d3.format(",d");
@@ -27,6 +31,7 @@ d3.json("assets/data/treeMap_data.json", function(error, data) {
 
     treemap(root);
 
+
     var cell = svg.selectAll("g")
         .data(root.leaves())
         .enter().append("g")
@@ -45,6 +50,7 @@ d3.json("assets/data/treeMap_data.json", function(error, data) {
 
     cell.append("text")
         .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+        .attr("color", "white")
 
         .selectAll("tspan")
         .data(function(d) { return d.data.name.split(/(?=[A-Z][^A-Z])/g); })
@@ -54,7 +60,8 @@ d3.json("assets/data/treeMap_data.json", function(error, data) {
         .text(function(d) { return d; });
 
     cell.append("title")
-        .text(function(d) { return d.data.id + "\n" + format(d.value); });
+        .text(function(d) { return d.data.id + "\n" + format(d.value); })
+        .attr("color", "white");
 
     d3.selectAll("input")
         .data([sumBySize, sumByCount], function(d) { return d ? d.name : this.value; })
