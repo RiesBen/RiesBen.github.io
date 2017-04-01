@@ -3,7 +3,10 @@
     visibility: visible;
 }
 #main{
-
+    background-color: #011330;
+}
+h2{
+    margin-top: 1%;
 }
 /* Science */
 
