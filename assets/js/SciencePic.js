@@ -9,7 +9,7 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
-    var nodes = d3.range(200).map(function() { return {radius:17}; }), // Math.random() * 12 +
+    var nodes = d3.range(200).map(function() { return {radius:width*0.015}; }), // Math.random() * 12 +
         root = nodes[0];
 
     root.radius = 10;
@@ -46,13 +46,13 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
                 return  "SOL"; }})
         .attr("r", function(d, i) {
             if(i == protein_index){
-                return 70;
+                return width*0.07;
             }
             else if(i % 20 == 0 || i % 20 == 1){
-                return 18;
+                return width*0.015;
             }
             else{
-                return  15; }
+                return  width*0.012; }
         })//d.radius; })
         .style("fill", function(d, i) {
             if(i == protein_index){
@@ -88,6 +88,12 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
       force.resume();
     });
 
+    svg.on("MozOrientation", function() {
+        var p1 = d3.mouse(0);
+        root.px = p1[0];
+        root.py = p1[1];
+        force.resume();
+    });
     function collide(node) {
         var r = node.radius + 16,
             nx1 = node.x - r,
@@ -242,3 +248,9 @@ svg.append("line")
     .attr("y2", box_back_p4[1])
     .attr("stroke-width", 8)
     .attr("stroke", d3.rgb("#555555"));
+
+
+gyro=(function(a,b){"function"===typeof define&&define.amd?define(b):"object"===typeof exports?module.exports=b():a.gyro=b()})(this,function(){var a={x:null,y:null,z:null,alpha:null,beta:null,gamma:null},b={x:0,y:0,z:0,alpha:0,beta:0,gamma:0},g=null,e=[],h={frequency:500,calibrate:function(){for(var f in a)b[f]="number"===typeof a[f]?a[f]:0},getOrientation:function(){return a},startTracking:function(b){g=setInterval(function(){b(a)},h.frequency)},stopTracking:function(){clearInterval(g)},hasFeature:function(a){for(var b in e)if(a==
+    e[b])return!0;return!1},getFeatures:function(){return e}};window&&window.addEventListener&&function(){function f(d){e.push("MozOrientation");d.target.removeEventListener("MozOrientation",f,!0);d.target.addEventListener("MozOrientation",function(c){a.x=c.x-b.x;a.y=c.y-b.y;a.z=c.z-b.z},!0)}function g(d){e.push("devicemotion");d.target.removeEventListener("devicemotion",g,!0);d.target.addEventListener("devicemotion",function(c){a.x=c.accelerationIncludingGravity.x-b.x;a.y=c.accelerationIncludingGravity.y-
+    b.y;a.z=c.accelerationIncludingGravity.z-b.z},!0)}function h(d){e.push("deviceorientation");d.target.removeEventListener("deviceorientation",h,!0);d.target.addEventListener("deviceorientation",function(c){a.alpha=c.alpha-b.alpha;a.beta=c.beta-b.beta;a.gamma=c.gamma-b.gamma},!0)}window.addEventListener("MozOrientation",f,!0);window.addEventListener("devicemotion",g,!0);window.addEventListener("deviceorientation",h,!0)}();return h});
+
