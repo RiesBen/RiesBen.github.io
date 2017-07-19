@@ -1,6 +1,6 @@
 .link {
     fill: none;
-    stroke: #555;
+    stroke: #e6e6e6;
     stroke-opacity: 0.4;
     stroke-width: 1px;
 }
@@ -15,7 +15,7 @@ text {
     fill: white;
 }
 .grid .tick line{
-    stroke: grey;
+    stroke: #ffffff;
     stroke-dasharray: 5, 10;
     opacity: 0.7;
 }
