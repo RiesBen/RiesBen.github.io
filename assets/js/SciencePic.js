@@ -2,79 +2,119 @@
  * Created by benjamin on 4/1/17.
  */
 
-function newLayer(node, root_rectangle,  width, height, x_offset, y_offset) {
-    var children = node["children"];
-    var margin_height = 0.05 * root_rectangle.attr("height");
-    var margin_width = 0.03 * root_rectangle.attr("width");
-    var layer_height = height- margin_height; //root_rectangle.attr("height")
-    var layer_width = width - margin_width; //root_rectangle.attr("width")
+function newLayer(svg,  width, height, x_offset, y_offset) {
 
-    var it = 0;
-    var x_it = 0;
-    var y_it = 0;
+    var nodes = d3.range(200).map(function() { return {radius:20}; }), // Math.random() * 12 +
+        root = nodes[0];
 
-    for (it = 0; it < children.length; it++) {
-        var child = children[it];
+    root.radius = 10;
+    root.fixed = true;
 
-        if (width > height) {
-            layer_width = (root_rectangle.attr("width") / children.length)-margin_width;
-            x_it = it;
-        }
-        else {
-            layer_height = (root_rectangle.attr("height") / children.length)-margin_height;
-            y_it = it;
-        }
+    var force = d3.layout.force()
+        .gravity(0.25)
+        .chargeDistance(0.3*width)
+        .charge(function(d, i) { return i ? 0 : -3000; })
+        .nodes(nodes)
+        .size([x_offset + width, height]);
 
-        var y = y_it* layer_height+ 0.5*margin_height+y_offset;
-        var x = x_it * layer_width+ 0.5*margin_width+x_offset;
+    force.start();
+    svg.attr("width", width)
+        .attr("height", height);
 
-        var rect = root_rectangle.append("rect")
-            .attr("id", child["name"])
-            .attr("x", x)
-            .attr("y", y)
-            .attr("width", layer_width)
-            .attr("height", layer_height)
-            .attr("fill", color[it])
-            .attr("stroke-width", "2")
-            .attr("stroke", "black");
+    svg.selectAll("circle")
+        .data(nodes.slice(1))
+        .enter().append("circle")
+        .attr("r", function(d, i) {
+            if(i == 0){
+                return 70;
+            }
+            else if(i % 20 == 0 || i % 20 == 1){
+                return 18;
+            }
+            else{
+                return  15; }
+        })//d.radius; })
+        .style("fill", function(d, i) {
+            if(i == 0){
+                return d3.rgb(244, 170, 66);
+            }
+            else if(i % 20 == 0){
+                return d3.rgb(18, 183, 34);
+            }
+            else if(i % 20 == 1){
+                return d3.rgb(209, 16, 41);
+            }
+            else{
+                return  d3.rgb(65, 157, 244); }})
+        .data(nodes.slice(1)[1])
 
-        var text = root_rectangle.append("text")
-            .attr("id", "text")
-            .attr("x", x+ 0.03* layer_width)
-            .attr("y", y + 0.07* layer_height)
-            .text(child["name"])
-            .attr("font-size", "18px")
-            .attr("fill", "white");
 
-        console.log(text)
-        console.log(child["name"]);
-        console.log( x);
-        console.log( y);
+    svg.selectAll("circle")
+    force.on("tick", function(e) {
+      var q = d3.geom.quadtree(nodes),
+          i = 0,
+          n = nodes.length;
 
-        if (child["children"]) {
-            newLayer(child, svg, layer_width, layer_height, x, y + 0.07* layer_height);
-        }
+      while (++i < n) q.visit(collide(nodes[i]));
+        svg.selectAll("circle")
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+    });
+
+    svg.on("mousemove", function() {
+      var p1 = d3.mouse(this);
+      root.px = p1[0];
+      root.py = p1[1];
+      force.resume();
+    });
+
+    function collide(node) {
+        var r = node.radius + 16,
+            nx1 = node.x - r,
+            nx2 = node.x + r,
+            ny1 = node.y - r,
+            ny2 = node.y + r;
+        return function (quad, x1, y1, x2, y2) {
+            if (quad.point && (quad.point !== node)) {
+                var x = node.x - quad.point.x,
+                    y = node.y - quad.point.y,
+                    l = Math.sqrt(x * x + y * y),
+                    r = node.radius + quad.point.radius;
+                if (l < r) {
+                    l = (l - r) / l * .5;
+                    node.x -= x *= l;
+                    node.y -= y *= l;
+                    quad.point.x += x;
+                    quad.point.y += y;
+                }
+            }
+            return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+        };
     }
 }
 
-
-//var svg = d3.select("svg");
+var svg = d3.select("svg");
 var box = document.getElementById('graph'),
     width = 0.9 * box.clientWidth,
     height = box.clientHeight;
+
 svg.attr("width", width)
     .attr("height", height);
 
-var color = ["blue", "red"];
-
-var request = new XMLHttpRequest();
-request.open("GET", "assets/data/treeMap_data.json", false);
-request.send(null);
-var dict = JSON.parse(request.responseText);
-
-//svg.attr("width", width)
- //   .attr("height", height);
-
-
-
-//newLayer(dict, svg, width, height, 0, 0);
+var rect_width = width*0.45;
+svg.append("rect")
+    .attr("width",rect_width)
+    .attr("height", height)
+    .attr("x", 0)
+    .attr("y",0)
+    .style("fill", d3.rgb("#088c34").brighter(1.2))
+    .style("stroke-width", 0.02*rect_width)
+    .style("stroke", d3.rgb("#088c34").darker(0.9))
+    .append("text")
+    .text("Simulations with biochemical background!")
+    .attr("x", 20)
+    .attr("y", 20)
+    .attr("font-size", 20)
+    .attr("fill", "black")
+    .attr("class", "content");
+newLayer( svg, width, height, rect_width*1.1, 0);
