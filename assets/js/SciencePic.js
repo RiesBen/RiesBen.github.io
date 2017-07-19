@@ -9,7 +9,7 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
-    var nodes = d3.range(200).map(function() { return {radius:20}; }), // Math.random() * 12 +
+    var nodes = d3.range(200).map(function() { return {radius:17}; }), // Math.random() * 12 +
         root = nodes[0];
 
     root.radius = 10;
@@ -26,12 +26,26 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
     svg.attr("width", width)
         .attr("height", height);
 
+    var protein_index = Math.round((nodes.slice(1).length-1)*0.85);
+
     svg.selectAll("circle")
         .data(nodes.slice(1))
         .enter().append("circle")
         .attr("x", function(d) {return width*0.5})
+        .attr("name", function(d, i) {
+            if(i == protein_index){
+                return "protein";
+            }
+            else if(i % 20 == 0){
+                return "NA";
+            }
+            else if(i % 20 == 1){
+                return "CL";
+            }
+            else{
+                return  "SOL"; }})
         .attr("r", function(d, i) {
-            if(i == 0){
+            if(i == protein_index){
                 return 70;
             }
             else if(i % 20 == 0 || i % 20 == 1){
@@ -41,7 +55,7 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
                 return  15; }
         })//d.radius; })
         .style("fill", function(d, i) {
-            if(i == 0){
+            if(i == protein_index){
                 return d3.rgb(244, 170, 66);
             }
             else if(i % 20 == 0){
