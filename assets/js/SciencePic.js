@@ -2,7 +2,12 @@
  * Created by benjamin on 4/1/17.
  */
 
-function newLayer(svg,  width, height, x_offset, y_offset) {
+var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
+    "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
+    " clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
+    " consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
+    "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
+function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     var nodes = d3.range(200).map(function() { return {radius:20}; }), // Math.random() * 12 +
         root = nodes[0];
@@ -24,6 +29,7 @@ function newLayer(svg,  width, height, x_offset, y_offset) {
     svg.selectAll("circle")
         .data(nodes.slice(1))
         .enter().append("circle")
+        .attr("x", function(d) {return width*0.5})
         .attr("r", function(d, i) {
             if(i == 0){
                 return 70;
@@ -101,20 +107,124 @@ var box = document.getElementById('graph'),
 svg.attr("width", width)
     .attr("height", height);
 
-var rect_width = width*0.45;
-svg.append("rect")
-    .attr("width",rect_width)
+var text_box_width = width*0.45;
+var sim_center = text_box_width+(width*0.6)/2;
+var text_box = svg.append("rect")
+    .attr("width",text_box_width)
     .attr("height", height)
     .attr("x", 0)
     .attr("y",0)
-    .style("fill", d3.rgb("#088c34").brighter(1.2))
-    .style("stroke-width", 0.02*rect_width)
-    .style("stroke", d3.rgb("#088c34").darker(0.9))
-    .append("text")
-    .text("Simulations with biochemical background!")
-    .attr("x", 20)
-    .attr("y", 20)
-    .attr("font-size", 20)
-    .attr("fill", "black")
-    .attr("class", "content");
-newLayer( svg, width, height, rect_width*1.1, 0);
+    .style("fill", d3.rgb("#088c34").darker(0.9))
+    .style("stroke-width", 0.01*text_box_width)
+    .style("stroke", d3.rgb("#088c34").brighter(1.2));
+
+svg.append("foreignObject")
+    .attr("x", width*0.03)
+    .attr("y", height*0.07)
+    .attr("width", text_box_width-(width*0.05))
+    .attr("height", height*0.7)
+    .html("<h1 class='text'>Simulation of Biochemistry!</h1>" +
+        "<p class='text'>"+desc+"</p>");
+
+var dwidth = text_box_width/3;
+var stamps_area = [dwidth*0.1, height*0.7];
+var stamp_width = 0;
+var stamp_height = 0;
+var stamps_height =height*0.3;
+if(text_box_width<=stamps_height){
+    stamp_width = dwidth*0.8 ;
+    stamp_height = stamp_width ;
+}
+else{
+    stamp_width = dwidth*0.8;
+    stamp_height = stamps_height*0.7;
+
+}
+
+var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
+var text=["biochemistry", "informatics", "physics"]
+for( var i =0; i <3; i++){
+    svg.append("rect")
+        .attr("x", stamps_area[0]+i*dwidth)
+        .attr("y", stamps_area[1])
+        .attr("width", stamp_width)
+        .attr("height", stamp_height)
+        .style("fill", colors[i])
+    svg.append("text")
+        .attr("x", stamps_area[0]+i*dwidth+stamp_width*0.5-6*text[i].length)
+        .attr("y", stamps_area[1]+stamp_height*0.55)
+        .attr("class", "content")
+        .attr("font-size", "24")
+        .attr("font-weight", "bold")
+        .text(text[i]);
+
+}
+
+
+
+//////////////////////////////////////////////////
+//simulation_box+ coarse_sim:
+var box_width = width*0.5;
+var box_height = height*0.85;
+var box_front_p1=[sim_center*0.75, 0.1*height];
+var box_front_p2=[box_front_p1[0], box_front_p1[1]+box_height];
+var box_front_p3=[box_front_p1[0]+box_width,box_front_p1[1]];
+var box_front_p4=[box_front_p1[0]+box_width,box_front_p1[1]+box_height];
+
+var box_back_p1=[sim_center*0.85, 0.03*height];
+var box_back_p2=[box_back_p1[0], box_back_p1[1]+box_height];
+var box_back_p3=[box_back_p1[0] + box_width, box_back_p1[1]];
+var box_back_p4=[box_back_p1[0] + box_width,box_back_p1[1]+box_height];
+
+svg.append("rect")
+    .attr("x", box_back_p1[0])
+    .attr("y", box_back_p1[1])
+    .attr("width", box_width)
+    .attr("height", box_height)
+    .style("stroke", d3.rgb("#555555"))
+    .style("stroke-width", 5)
+    .style("fill", "none");
+
+svg.append("line")
+    .attr("x1", box_front_p1[0])
+    .attr("x2", box_back_p1[0])
+    .attr("y1", box_front_p1[1])
+    .attr("y2", box_back_p1[1])
+    .attr("stroke-width", 8)
+    .attr("stroke", d3.rgb("#555555"));
+
+svg.append("line")
+    .attr("x1", box_front_p2[0])
+    .attr("x2", box_back_p2[0])
+    .attr("y1", box_front_p2[1])
+    .attr("y2", box_back_p2[1])
+    .attr("stroke-width", 8)
+    .attr("stroke", d3.rgb("#555555"));
+
+
+coarseSim( svg, width, height, sim_center, 0);
+
+svg.append("rect")
+    .attr("x", box_front_p1[0])
+    .attr("y", box_front_p1[1])
+    .attr("width", box_width)
+    .attr("height", box_height)
+    .style("stroke", d3.rgb("#555555"))
+    .style("stroke-width", 8)
+    .style("fill", "none");
+
+svg.append("line")
+    .attr("x1", box_front_p3[0])
+    .attr("x2", box_back_p3[0])
+    .attr("y1", box_front_p3[1])
+    .attr("y2", box_back_p3[1])
+    .attr("stroke-width", 8)
+    .attr("stroke", d3.rgb("#555555"));
+
+svg.append("line")
+    .attr("x1", box_front_p4[0])
+    .attr("x2", box_back_p4[0])
+    .attr("y1", box_front_p4[1])
+    .attr("y2", box_back_p4[1])
+    .attr("stroke-width", 8)
+    .attr("stroke", d3.rgb("#555555"));
