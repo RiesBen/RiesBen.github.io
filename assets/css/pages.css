@@ -43,18 +43,17 @@ div.content{
     margin-bottom: 5%;
 }
 
-p.text{
-    font-size: 2.3em;
+h1.page_text{
+    color: ghostwhite;
+
+}
+p.page_text {
+        font-size: 2.3em;
     font-weight: bold;
     color: ghostwhite;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-h1.text{
-    color: ghostwhite;
-
-}
-
 div.graph{
     margin: 0 5% 0% 5%;
     align-content: center;

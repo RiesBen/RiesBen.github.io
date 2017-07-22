@@ -10,7 +10,7 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 
 var box = document.getElementById('graph'),
-    width = box.clientWidth,
+    width = 0.9*box.clientWidth,
     height = box.clientHeight;
 
 var text_box_width = width*0.45,
@@ -20,7 +20,8 @@ text_height =height*0.6;
 
 // main svg
 var svg = d3.select("svg")
-
+    .attr("width", width)
+    .attr("height", height);
 var text_box = svg.append("rect")
     .attr("width", text_box_width)
     .attr("height", height)
@@ -32,11 +33,11 @@ var text_box = svg.append("rect")
 
 svg.append("foreignObject")
     .attr("x", width*0.03)
-    .attr("y", height*0.07)
+    .attr("y", height*0.02)
     .attr("width", text_box_width-(width*0.05))
-    .attr("height", text_height)
-    .html("<h1 class='text'>I like programming!</h1>" +
-        "<p class='text'>"+desc+"</p>");
+    .attr("height", 0.7*height)
+    .html("<h1 class='page_text'>I like programming!</h1>" +
+        "<p class='page_text'>"+desc+"</p>");
 
 var dendro = svg.append("svg")
     .attr("x", plot_offset)

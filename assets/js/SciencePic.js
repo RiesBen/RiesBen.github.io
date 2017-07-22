@@ -17,7 +17,7 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
     var protein_index = Math.round((particle_num-1)*0.9);
     var nodes = d3.range(particle_num).map(function(d,i) {
             if(i == protein_index){
-                return {radius:width*0.017};
+                return {radius:width*0.05};
             }
             else if(i % 20 == 0 || i % 20 == 1){
                 return {radius:width*0.017};
@@ -177,8 +177,8 @@ svg.append("foreignObject")
     .attr("y", height*0.07)
     .attr("width", text_box_width-(width*0.05))
     .attr("height", text_height)
-    .html("<h1 class='text'>Simulation of Biochemistry!</h1>" +
-          "<p class='text'>"+desc+"</p>");
+    .html("<h1 class='page_text'>Simulation of Biochemistry!</h1>" +
+          "<p class='page_text'>"+desc+"</p>");
 
 for( var i =0; i <3; i++){
     svg.append("rect")
