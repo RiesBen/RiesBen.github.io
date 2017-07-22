@@ -1,6 +1,10 @@
 /**
  * Created by benjamin on 4/1/17.
  */
+var particle_colors = [d3.rgb(244, 170, 66),  d3.rgb(65, 157, 244), d3.rgb(209, 16, 41), d3.rgb(18, 183, 34)]
+var particle_names  = ["protein", "water", "sodium", "chloride"];
+
+
 
 var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
     "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
@@ -9,7 +13,17 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
-    var nodes = d3.range(200).map(function() { return {radius:width*0.015}; }), // Math.random() * 12 +
+    var particle_num = 200;
+    var protein_index = Math.round((particle_num-1)*0.9);
+    var nodes = d3.range(particle_num).map(function(d,i) {
+            if(i == protein_index){
+                return {radius:width*0.017};
+            }
+            else if(i % 20 == 0 || i % 20 == 1){
+                return {radius:width*0.017};
+            }
+            else{
+                return {radius:width*0.014}; }; }), // Math.random() * 12 +
         root = nodes[0];
 
     root.radius = 10;
@@ -25,8 +39,6 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
     force.start();
     svg.attr("width", width)
         .attr("height", height);
-
-    var protein_index = Math.round((nodes.slice(1).length-1)*0.85);
 
     svg.selectAll("circle")
         .data(nodes.slice(1))
@@ -56,16 +68,16 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
         })//d.radius; })
         .style("fill", function(d, i) {
             if(i == protein_index){
-                return d3.rgb(244, 170, 66);
+                return particle_colors[0];
             }
             else if(i % 20 == 0){
-                return d3.rgb(18, 183, 34);
+                return particle_colors[3];
             }
             else if(i % 20 == 1){
-                return d3.rgb(209, 16, 41);
+                return particle_colors[2];
             }
             else{
-                return  d3.rgb(65, 157, 244); }})
+                return  particle_colors[1]; }})
         .data(nodes.slice(1)[1])
 
 
@@ -129,6 +141,25 @@ svg.attr("width", width)
 
 var text_box_width = width*0.45;
 var sim_center = text_box_width+(width*0.6)/2;
+var dwidth = text_box_width/3;
+var stamps_area = [dwidth*0.1, height*0.7];
+var stamp_width = 0;
+var stamp_height = 0;
+var stamps_height =height*0.3;
+var text_height =height*0.6;
+
+if(text_box_width<=stamps_height){
+    stamp_width = dwidth*0.8 ;
+    stamp_height = stamp_width ;
+}
+else{
+    stamp_width = dwidth*0.8;
+    stamp_height = stamps_height*0.7;
+}
+
+var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
+var text=["biochemistry", "informatics", "physics"]
+
 var text_box = svg.append("rect")
     .attr("width",text_box_width)
     .attr("height", height)
@@ -142,27 +173,10 @@ svg.append("foreignObject")
     .attr("x", width*0.03)
     .attr("y", height*0.07)
     .attr("width", text_box_width-(width*0.05))
-    .attr("height", height*0.7)
+    .attr("height", text_height)
     .html("<h1 class='text'>Simulation of Biochemistry!</h1>" +
-        "<p class='text'>"+desc+"</p>");
+          "<p class='text'>"+desc+"</p>");
 
-var dwidth = text_box_width/3;
-var stamps_area = [dwidth*0.1, height*0.7];
-var stamp_width = 0;
-var stamp_height = 0;
-var stamps_height =height*0.3;
-if(text_box_width<=stamps_height){
-    stamp_width = dwidth*0.8 ;
-    stamp_height = stamp_width ;
-}
-else{
-    stamp_width = dwidth*0.8;
-    stamp_height = stamps_height*0.7;
-
-}
-
-var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
-var text=["biochemistry", "informatics", "physics"]
 for( var i =0; i <3; i++){
     svg.append("rect")
         .attr("x", stamps_area[0]+i*dwidth)
@@ -171,10 +185,10 @@ for( var i =0; i <3; i++){
         .attr("height", stamp_height)
         .style("fill", colors[i])
     svg.append("text")
-        .attr("x", stamps_area[0]+i*dwidth+stamp_width*0.5-6*text[i].length)
+        .attr("x", stamps_area[0]+i*dwidth+stamp_width*0.5-( stamp_width*0.035)*text[i].length)
         .attr("y", stamps_area[1]+stamp_height*0.55)
         .attr("class", "content")
-        .attr("font-size", "24")
+        .attr("font-size", stamp_width*0.15)
         .attr("font-weight", "bold")
         .text(text[i]);
 
@@ -250,7 +264,24 @@ svg.append("line")
     .attr("stroke", d3.rgb("#555555"));
 
 
-gyro=(function(a,b){"function"===typeof define&&define.amd?define(b):"object"===typeof exports?module.exports=b():a.gyro=b()})(this,function(){var a={x:null,y:null,z:null,alpha:null,beta:null,gamma:null},b={x:0,y:0,z:0,alpha:0,beta:0,gamma:0},g=null,e=[],h={frequency:500,calibrate:function(){for(var f in a)b[f]="number"===typeof a[f]?a[f]:0},getOrientation:function(){return a},startTracking:function(b){g=setInterval(function(){b(a)},h.frequency)},stopTracking:function(){clearInterval(g)},hasFeature:function(a){for(var b in e)if(a==
-    e[b])return!0;return!1},getFeatures:function(){return e}};window&&window.addEventListener&&function(){function f(d){e.push("MozOrientation");d.target.removeEventListener("MozOrientation",f,!0);d.target.addEventListener("MozOrientation",function(c){a.x=c.x-b.x;a.y=c.y-b.y;a.z=c.z-b.z},!0)}function g(d){e.push("devicemotion");d.target.removeEventListener("devicemotion",g,!0);d.target.addEventListener("devicemotion",function(c){a.x=c.accelerationIncludingGravity.x-b.x;a.y=c.accelerationIncludingGravity.y-
-    b.y;a.z=c.accelerationIncludingGravity.z-b.z},!0)}function h(d){e.push("deviceorientation");d.target.removeEventListener("deviceorientation",h,!0);d.target.addEventListener("deviceorientation",function(c){a.alpha=c.alpha-b.alpha;a.beta=c.beta-b.beta;a.gamma=c.gamma-b.gamma},!0)}window.addEventListener("MozOrientation",f,!0);window.addEventListener("devicemotion",g,!0);window.addEventListener("deviceorientation",h,!0)}();return h});
+var rect_color=particle_colors;
+var rect_text=particle_names;
+var rect_width = box_width/8
+var rect_height = 0.1*(height - box_height)
 
+for( var i =0; i <4; i++) {
+    svg.append("rect")
+        .attr("x", box_front_p1[0] + i* rect_width*2)
+        .attr("y", box_front_p4[1] + (rect_height*1.5))
+        .style("stroke", d3.rgb("#555555"))
+        .attr("width", rect_width)
+        .attr("height", rect_height)
+        .style("fill", rect_color[i]);
+    svg.append("text")
+        .attr("x", box_front_p1[0] + (i+0.5)*rect_width*2+3)
+        .attr("y", box_front_p4[1] + (rect_height*2.3))
+        .attr("class", "content")
+        .attr("font-size", 12)
+        .attr("font-weight", "bold")
+        .text(rect_text[i]);
+}
