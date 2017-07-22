@@ -11,18 +11,20 @@ ori.Software.Scientific.Coot,1,#1169AE
 ori.Software.Scientific.Avogadro, 2.5,#563B7E
 ori.Software.Scientific.Chemsketch, 2.5,#F6854D
 ori.Software.Scientific.Knime,2,#D6BA33
-ori.Programming,
-ori.Programming.programmingLanguage
-ori.Programming.programmingLanguage.Java,3, #FF1A00
-ori.Programming.programmingLanguage.C#, 3, #8A00AD
-ori.Programming.programmingLanguage.C++, 1.5, #0073AD
-ori.Programming.programmingLanguage.C, 1.5, #0857AD
-ori.Programming.script_Language
-ori.Programming.script_Language.Python, 3, #00A10B
-ori.Programming.script_Language.R, 1, #FF8F00
-ori.Programming.script_Language.perl, 0.5, #00CFFF
-ori.Programming.web,
-ori.Programming.web.HTML, 3, #FF4D00
-ori.Programming.web.CSS, 3, #4A00FF
-ori.Programming.web.JavaScript, 3, #FF0030
-ori.Programming.web.php, 0.5, #6A00FF
+ori.Software.Scientific.Gromacs,2,#1169AE
+ori.coding,
+ori.coding.programming
+ori.coding.programming.Java,3, #FF1A00
+ori.coding.programming.C#, 3, #8A00AD
+ori.coding.programming.C++, 1.5, #0073AD
+ori.coding.programming.C, 1.5, #0857AD
+ori.coding.scripting
+ori.coding.scripting.Python, 3, #00A10B
+ori.coding.scripting.R, 1, #FF8F00
+ori.coding.scripting.Bash, 1, #1169AE
+ori.coding.scripting.perl, 0.5, #00CFFF
+ori.coding.web,
+ori.coding.web.HTML, 3, #FF4D00
+ori.coding.web.CSS, 3, #4A00FF
+ori.coding.web.JavaScript, 3, #FF0030
+ori.coding.web.php, 0.5, #6A00FF

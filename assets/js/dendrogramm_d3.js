@@ -14,8 +14,8 @@ var box = document.getElementById('graph'),
     height = box.clientHeight;
 
 var text_box_width = width*0.45,
-dendrogram_offset=text_box_width+0.05*text_box_width,
-dendrogram_width= width-dendrogram_offset-width*0.20,
+plot_offset=text_box_width+0.05*text_box_width,
+plot_width= width-plot_offset-width*0.02,
 text_height =height*0.6;
 
 // main svg
@@ -29,6 +29,7 @@ var text_box = svg.append("rect")
     .style("fill", d3.rgb("#990000").darker(0.9))
     .style("stroke-width",  0.01*text_box_width)
     .style("stroke", d3.rgb("#990000").brighter(1.2));
+
 svg.append("foreignObject")
     .attr("x", width*0.03)
     .attr("y", height*0.07)
@@ -38,13 +39,25 @@ svg.append("foreignObject")
         "<p class='text'>"+desc+"</p>");
 
 var dendro = svg.append("svg")
-    .attr("x", dendrogram_offset)
+    .attr("x", plot_offset)
     .attr("y", 0)
-    .attr("width", dendrogram_width)
+    .attr("width", plot_width)
     .attr("height", height);
+
+
+
+
+
+
+
+
+var dendrogram_width = plot_width*0.4;
+var bar_width =  plot_width*0.6;
 
 g = dendro.append("g").attr("transform", "translate(0,0)");       // move right 20px.
 
+
+//bar-plot
 // x-scale and x-axis
 var experienceName = ["", "Used 1.0","Basic 2.0","Expirenced 3.0"];
 var formatSkillPoints = function (d) {
@@ -52,16 +65,17 @@ var formatSkillPoints = function (d) {
 }
 var xScale =  d3.scaleLinear()
     .domain([0,3])
-    .range([0, 300]);
+    .range([0, bar_width]);
 
 var xAxis = d3.axisTop()
     .scale(xScale)
     .ticks(3)
     .tickFormat(formatSkillPoints);
 
+//dendrogramm
 // Setting up a way to handle the data
 var tree = d3.cluster()                 // This D3 API method setup the Dendrogram datum position.
-    .size([height, dendrogram_width ])    // Total width - bar chart width = Dendrogram chart width
+    .size([height, dendrogram_width])    // Total width - bar chart width = Dendrogram chart width
     .separation(function separate(a, b) {
         return a.parent == b.parent            // 2 levels tree grouping for category
         || a.parent.parent == b.parent
@@ -106,11 +120,12 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
         .attr("class", "node--leaf-g")
         .attr("transform", "translate(" + 8 + "," + -13 + ")");
 
+    var bar_height = height/(data.length+2);
     leafNodeG.append("rect")
         .attr("class","shadow")
         .style("fill", function (d) {return d.data.color;})
         .attr("width", 2)
-        .attr("height", 30)
+        .attr("height", bar_height)
         .attr("rx", 2)
         .attr("ry", 2)
         .transition()
@@ -118,8 +133,9 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
         .attr("width", function (d) {return xScale(d.data.value);});
 
     leafNodeG.append("text")
-        .attr("dy", 19.5)
+        .attr("dy",bar_height*0.7)
         .attr("x", 8)
+        .attr("font-size", bar_height*0.7)
         .style("text-anchor", "start")
         .text(function (d) {
             return d.data.id.substring(d.data.id.lastIndexOf(".") + 1);
@@ -129,6 +145,7 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
     var internalNode = g.selectAll(".node--internal");
     internalNode.append("text")
         .attr("y", -10)
+        .attr("font-size", dendrogram_width*0.07)
         .style("text-anchor", "middle")
         .text(function (d) {
             return d.data.id.substring(d.data.id.lastIndexOf(".") + 1);
