@@ -157,11 +157,14 @@ else{
     stamp_height = stamps_height*0.7;
 }
 
+//////////////////////////////////////////////////
+//Text Box
+
 var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
 var text=["biochemistry", "informatics", "physics"]
 
 var text_box = svg.append("rect")
-    .attr("width",text_box_width)
+    .attr("width", text_box_width)
     .attr("height", height)
     .attr("x", 0)
     .attr("y",0)

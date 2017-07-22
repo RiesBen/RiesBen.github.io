@@ -2,13 +2,48 @@
  * Created by benjamin on 4/1/17.
  */
 
-// main svg
-var svg = d3.select("svg"),
-    g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
+
+var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
+    "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
+    " clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
+    " consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
+    "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 
 var box = document.getElementById('graph'),
-     width = 0.9*box.clientWidth,
-    height = 1.0*box.clientHeight;
+    width = box.clientWidth,
+    height = box.clientHeight;
+
+var text_box_width = width*0.45,
+dendrogram_offset=text_box_width+0.05*text_box_width,
+dendrogram_width= width-dendrogram_offset-width*0.20,
+text_height =height*0.6;
+
+// main svg
+var svg = d3.select("svg")
+
+var text_box = svg.append("rect")
+    .attr("width", text_box_width)
+    .attr("height", height)
+    .attr("x", 0)
+    .attr("y", 0)
+    .style("fill", d3.rgb("#990000").darker(0.9))
+    .style("stroke-width",  0.01*text_box_width)
+    .style("stroke", d3.rgb("#990000").brighter(1.2));
+svg.append("foreignObject")
+    .attr("x", width*0.03)
+    .attr("y", height*0.07)
+    .attr("width", text_box_width-(width*0.05))
+    .attr("height", text_height)
+    .html("<h1 class='text'>I like programming!</h1>" +
+        "<p class='text'>"+desc+"</p>");
+
+var dendro = svg.append("svg")
+    .attr("x", dendrogram_offset)
+    .attr("y", 0)
+    .attr("width", dendrogram_width)
+    .attr("height", height);
+
+g = dendro.append("g").attr("transform", "translate(0,0)");       // move right 20px.
 
 // x-scale and x-axis
 var experienceName = ["", "Used 1.0","Basic 2.0","Expirenced 3.0"];
@@ -26,7 +61,7 @@ var xAxis = d3.axisTop()
 
 // Setting up a way to handle the data
 var tree = d3.cluster()                 // This D3 API method setup the Dendrogram datum position.
-    .size([height, width - 460])    // Total width - bar chart width = Dendrogram chart width
+    .size([height, dendrogram_width ])    // Total width - bar chart width = Dendrogram chart width
     .separation(function separate(a, b) {
         return a.parent == b.parent            // 2 levels tree grouping for category
         || a.parent.parent == b.parent
@@ -120,7 +155,7 @@ d3.csv("assets/data/coding_data.csv", row, function(error, data) {
     // Emphasize the y-axis baseline.
     svg.selectAll(".grid").select("line")
         .style("stroke-dasharray","20,1")
-        .style("stroke","black");
+        .style("stroke","white");
 
     // Animation functions for mouse on and off events.
     d3.selectAll(".node--leaf-g")
