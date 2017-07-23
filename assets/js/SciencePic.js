@@ -13,11 +13,11 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
-    var particle_num = 200;
-    var protein_index = Math.round((particle_num-1)*0.9);
+    var particle_num = 300;
+    var protein_index = Math.round((particle_num-1)*0.85);
     var nodes = d3.range(particle_num).map(function(d,i) {
-            if(i == protein_index){
-                return {radius:width*0.05};
+            if(i == protein_index+1){
+                return {radius:width*0.02};
             }
             else if(i % 20 == 0 || i % 20 == 1){
                 return {radius:width*0.017};
@@ -31,8 +31,19 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     var force = d3.layout.force()
         .gravity(0.25)
-        .chargeDistance(0.3*width)
-        .charge(function(d, i) { return i ? 0 : -3000; })
+        .chargeDistance(0.1*width)
+        .charge(function(d, i) {
+        if(i == protein_index+1){   //prot
+            return -10000;
+        }
+        else if(i % 20 == 2){   //Na
+            return +300;
+        }
+        else if(i % 20 == 1){   //Cl
+            return -300;
+        }
+        else{
+            return  -3; }})
         .nodes(nodes)
         .size([x_offset + width, height]);
 
