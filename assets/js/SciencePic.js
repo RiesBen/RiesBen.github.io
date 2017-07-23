@@ -14,12 +14,13 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     var particle_num = 300;
+    var salt_conc = particle_num*0.15;
     var protein_index = Math.round((particle_num-1)*0.85);
     var nodes = d3.range(particle_num).map(function(d,i) {
             if(i == protein_index+1){
                 return {radius:width*0.02};
             }
-            else if(i % 20 == 0 || i % 20 == 1){
+            else if(i % salt_conc== 0 || i % salt_conc == 1){
                 return {radius:width*0.017};
             }
             else{
@@ -36,10 +37,10 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
         if(i == protein_index+1){   //prot
             return -10000;
         }
-        else if(i % 20 == 2){   //Na
+        else if(i % salt_conc == 2){   //Na
             return +300;
         }
-        else if(i % 20 == 1){   //Cl
+        else if(i % salt_conc == 1){   //Cl
             return -300;
         }
         else{
@@ -59,10 +60,10 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
             if(i == protein_index){
                 return "protein";
             }
-            else if(i % 20 == 0){
+            else if(i % salt_conc == 0){
                 return "NA";
             }
-            else if(i % 20 == 1){
+            else if(i % salt_conc == 1){
                 return "CL";
             }
             else{
@@ -71,7 +72,7 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
             if(i == protein_index){
                 return width*0.07;
             }
-            else if(i % 20 == 0 || i % 20 == 1){
+            else if(i % salt_conc == 0 || i %  salt_conc == 1){
                 return width*0.015;
             }
             else{
@@ -81,10 +82,10 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
             if(i == protein_index){
                 return particle_colors[0];
             }
-            else if(i % 20 == 0){
+            else if(i % salt_conc == 0){
                 return particle_colors[3];
             }
-            else if(i % 20 == 1){
+            else if(i % salt_conc == 1){
                 return particle_colors[2];
             }
             else{
