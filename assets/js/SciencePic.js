@@ -13,7 +13,7 @@ var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam no
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
-    var particle_num = 300;
+    var particle_num = 200;
     var salt_conc = particle_num*0.15;
     var protein_index = Math.round((particle_num-1)*0.85);
     var nodes = d3.range(particle_num).map(function(d,i) {
