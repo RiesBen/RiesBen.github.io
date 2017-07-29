@@ -35,7 +35,7 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
         .chargeDistance(0.1*width)
         .charge(function(d, i) {
         if(i == protein_index+1){   //prot
-            return -10000;
+            return -8000;
         }
         else if(i % salt_conc == 2){   //Na
             return +300;
