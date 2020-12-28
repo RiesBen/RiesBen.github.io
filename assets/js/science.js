@@ -6,9 +6,47 @@ var particle_names  = ["protein", "water", "sodium", "chloride"];
 
 
 
-var desc = "As biochemist and bioinformatician I have an deep interest into the biochemical stuff"
+var desc = "As a biochemist and bioinformatician, I am excited about biology, chemistry, and physics. My focus is on biomolecules, their complex structure, and function. I love to investigate such molecules with computational methods and help to find answers to fundamental scientific or drug design questions."
+
 
 function coarseSim(svg,  width, height, x_offset, y_offset) {
+    //simBox
+    var box_width = width*0.5;
+    var box_height = height*0.85;
+    var box_front_p1=[x_offset*0.75, 0.1*height+y_offset];
+    var box_front_p2=[box_front_p1[0], box_front_p1[1]+box_height];
+    var box_front_p3=[box_front_p1[0]+box_width,box_front_p1[1]];
+    var box_front_p4=[box_front_p1[0]+box_width,box_front_p1[1]+box_height];
+
+    var box_back_p1=[x_offset*1, 0.03*height+y_offset];
+    var box_back_p2=[box_back_p1[0], box_back_p1[1]+box_height];
+    var box_back_p3=[box_back_p1[0] + box_width, box_back_p1[1]];
+    var box_back_p4=[box_back_p1[0] + box_width,box_back_p1[1]+box_height];
+
+    svg.append("rect")
+        .attr("x", box_back_p1[0])
+        .attr("y", box_back_p1[1])
+        .attr("width", box_width)
+        .attr("height", box_height)
+        .style("stroke", d3.rgb("#555555"))
+        .style("stroke-width", 5)
+        .style("fill", "none");
+
+    svg.append("line")
+        .attr("x1", box_front_p1[0])
+        .attr("x2", box_back_p1[0])
+        .attr("y1", box_front_p1[1])
+        .attr("y2", box_back_p1[1])
+        .attr("stroke-width", 8)
+        .attr("stroke", d3.rgb("#555555"));
+
+    svg.append("line")
+        .attr("x1", box_front_p2[0])
+        .attr("x2", box_back_p2[0])
+        .attr("y1", box_front_p2[1])
+        .attr("y2", box_back_p2[1])
+        .attr("stroke-width", 8)
+        .attr("stroke", d3.rgb("#555555"));
 
     var particle_num = 200;
     var salt_conc = particle_num*0.15;
@@ -43,11 +81,11 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
         else{
             return  -3; }})
         .nodes(nodes)
-        .size([x_offset + width, height]);
+        .size([x_offset + width*0.5, y_offset+height]);
 
     force.start();
-    svg.attr("width", width)
-        .attr("height", height);
+    svg.style("width", width)
+        .style("height", height);
 
     svg.selectAll("circle")
         .data(nodes.slice(1))
@@ -138,6 +176,55 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
             return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
         };
     }
+
+
+    svg.append("rect")
+        .attr("x", box_front_p1[0])
+        .attr("y", box_front_p1[1])
+        .attr("width", box_width)
+        .attr("height", box_height)
+        .style("stroke", d3.rgb("#555555"))
+        .style("stroke-width", 8)
+        .style("fill", "none");
+
+    svg.append("line")
+        .attr("x1", box_front_p3[0])
+        .attr("x2", box_back_p3[0])
+        .attr("y1", box_front_p3[1])
+        .attr("y2", box_back_p3[1])
+        .attr("stroke-width", 8)
+        .attr("stroke", d3.rgb("#555555"));
+
+    svg.append("line")
+        .attr("x1", box_front_p4[0])
+        .attr("x2", box_back_p4[0])
+        .attr("y1", box_front_p4[1])
+        .attr("y2", box_back_p4[1])
+        .attr("stroke-width", 8)
+        .attr("stroke", d3.rgb("#555555"));
+
+
+    var rect_color=particle_colors;
+    var rect_text=particle_names;
+    var rect_width = box_width/8
+    var rect_height = 0.1*(height - box_height)
+
+    for( var i =0; i <4; i++) {
+        svg.append("rect")
+            .attr("x", box_front_p1[0] + i* rect_width*2)
+            .attr("y", box_front_p4[1] + (rect_height*1.5))
+            .style("stroke", d3.rgb("#555555"))
+            .attr("width", rect_width)
+            .attr("height", rect_height)
+            .style("fill", rect_color[i]);
+        svg.append("text")
+            .attr("x", box_front_p1[0] + (i+0.5)*rect_width*2+3)
+            .attr("y", box_front_p4[1] + (rect_height*2.3))
+            .attr("class", "content")
+            .attr("font-size", 12)
+            .attr("font-weight", "bold")
+            .text(rect_text[i]);
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,8 +255,9 @@ text_box_background.style("display", "block")
 
 var text_box_text = text_box.append("foreignObject")
     .style("width", full)
-    .style("height", full)
-    .html("<h1 class='page_text'>Science</h1>" +
+    .style("height", "60%")
+    .style("font-size", "1.6em")
+    .html("<h1 class='page_text'>How the world works!</h1>" +
         "<p class='page_text'>"+desc+"</p>");
 
 //Smaller boxes
@@ -180,11 +268,11 @@ var stamp_height = 25;
 var stamp_width = 25;
 for( var i =0; i <nstamps; i++){
     var stamp_rect = text_box.append("rect")
+        .style("width", "25%")
+        .style("height", "25%")
         .style("position", "absolute")
         .style("y", "65%")
         .style("x", 33*i+5+"%")
-        .style("width", "25%")
-        .style("height", "25%")
         .style("fill", colors[i]);
 
     var stamp_text =text_box.append("foreignObject")
@@ -201,95 +289,22 @@ for( var i =0; i <nstamps; i++){
 
 }
 
-
-
 //////////////////////////////////////////////////
 //simulation_box+ coarse_sim:
-var sim_center = text_box_width+(width*0.6)/2;
-var box_width = width*0.5;
-var box_height = height*0.85;
-var box_front_p1=[sim_center*0.75, 0.1*height];
-var box_front_p2=[box_front_p1[0], box_front_p1[1]+box_height];
-var box_front_p3=[box_front_p1[0]+box_width,box_front_p1[1]];
-var box_front_p4=[box_front_p1[0]+box_width,box_front_p1[1]+box_height];
+var svg_simBox = d3.select("#anim")
+    .style("display", "inline-block")
+    .style("width", anim_box_width)
+    .style("height", anim_box_height)
+    .style("padding-left", "3%")
+    .style("padding-bottom", "2%")
+    .style("viewBox", "0 0 300 600");
 
-var box_back_p1=[sim_center*0.85, 0.03*height];
-var box_back_p2=[box_back_p1[0], box_back_p1[1]+box_height];
-var box_back_p3=[box_back_p1[0] + box_width, box_back_p1[1]];
-var box_back_p4=[box_back_p1[0] + box_width,box_back_p1[1]+box_height];
+var box = svg_simBox.node().getBoundingClientRect();
+console.log(box)
 
-svg.append("rect")
-    .attr("x", box_back_p1[0])
-    .attr("y", box_back_p1[1])
-    .attr("width", box_width)
-    .attr("height", box_height)
-    .style("stroke", d3.rgb("#555555"))
-    .style("stroke-width", 5)
-    .style("fill", "none");
+var box_height  = box.height*0.9;
+var box_width = box.width*1.5;
+var x_offset = width*0.03;
+var y_offset = height*0.01;
 
-svg.append("line")
-    .attr("x1", box_front_p1[0])
-    .attr("x2", box_back_p1[0])
-    .attr("y1", box_front_p1[1])
-    .attr("y2", box_back_p1[1])
-    .attr("stroke-width", 8)
-    .attr("stroke", d3.rgb("#555555"));
-
-svg.append("line")
-    .attr("x1", box_front_p2[0])
-    .attr("x2", box_back_p2[0])
-    .attr("y1", box_front_p2[1])
-    .attr("y2", box_back_p2[1])
-    .attr("stroke-width", 8)
-    .attr("stroke", d3.rgb("#555555"));
-
-
-coarseSim( svg, width, height, sim_center, 0);
-
-svg.append("rect")
-    .attr("x", box_front_p1[0])
-    .attr("y", box_front_p1[1])
-    .attr("width", box_width)
-    .attr("height", box_height)
-    .style("stroke", d3.rgb("#555555"))
-    .style("stroke-width", 8)
-    .style("fill", "none");
-
-svg.append("line")
-    .attr("x1", box_front_p3[0])
-    .attr("x2", box_back_p3[0])
-    .attr("y1", box_front_p3[1])
-    .attr("y2", box_back_p3[1])
-    .attr("stroke-width", 8)
-    .attr("stroke", d3.rgb("#555555"));
-
-svg.append("line")
-    .attr("x1", box_front_p4[0])
-    .attr("x2", box_back_p4[0])
-    .attr("y1", box_front_p4[1])
-    .attr("y2", box_back_p4[1])
-    .attr("stroke-width", 8)
-    .attr("stroke", d3.rgb("#555555"));
-
-
-var rect_color=particle_colors;
-var rect_text=particle_names;
-var rect_width = box_width/8
-var rect_height = 0.1*(height - box_height)
-
-for( var i =0; i <4; i++) {
-    svg.append("rect")
-        .attr("x", box_front_p1[0] + i* rect_width*2)
-        .attr("y", box_front_p4[1] + (rect_height*1.5))
-        .style("stroke", d3.rgb("#555555"))
-        .attr("width", rect_width)
-        .attr("height", rect_height)
-        .style("fill", rect_color[i]);
-    svg.append("text")
-        .attr("x", box_front_p1[0] + (i+0.5)*rect_width*2+3)
-        .attr("y", box_front_p4[1] + (rect_height*2.3))
-        .attr("class", "content")
-        .attr("font-size", 12)
-        .attr("font-weight", "bold")
-        .text(rect_text[i]);
-}
+coarseSim( svg_simBox, box_width, box_height, x_offset, y_offset);

@@ -2,12 +2,7 @@
  * Created by benjamin on 4/1/17.
  */
 
-var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
-    "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
-    " clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
-    " consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-    "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
-
+var desc = "Next to a cup of coffe and my hiking boots...."
 function gear_anim(svg,  width, height, x_offset, y_offset) {
 
     var width = width,
@@ -132,8 +127,6 @@ svg_text.append("foreignObject")
     .style("height", full)
     .html("<h1 class='page_text'>Leisure Time!</h1>" +
           "<p class='page_text'>"+desc+"</p>");
-
-
 
 
 //////////////////////////////////////////////////

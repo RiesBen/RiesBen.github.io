@@ -3,11 +3,7 @@
  */
 
 
-var desc = "During my bioinformatics studies, I could get expierence with many different codig languages and enjoyed " +
-    "learning their different aspects. But also programming paradigms like object oriented programming and functional programming," +
-    "where part of the curriculum. Additionally I enjoyed learning the way of thinking in parallel programming and machine learning."
-
-
+var desc = "During my bioinformatics studies, I could experience many different coding languages and enjoyed learning their various aspects. Additionally, programming paradigms like object-oriented programming and functional programming were part of the curriculum. Furthermore, I enjoyed learning how to think in parallel programming, high-performance computing, and machine learning."
 //content box
 //var box = document.getElementById('graph');
 //sub style
@@ -23,12 +19,11 @@ var box = document.getElementById('graph'),
 // main svg
 var text_box = d3.select("#text")
     .style("width", text_box_width)
-    .style("height", text_height)
     .style("padding-bottom", "2%");
 
 var text_box_rect = text_box.append("rect")
     .style("width", full)
-    .style("height", full)
+    .style("height", text_height)
     .style("fill", d3.rgb("#990000").darker(0.9))
     .style("stroke-width", "1%")
     .style("stroke", d3.rgb("#990000").brighter(1.2));
