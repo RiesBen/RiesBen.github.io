@@ -1,15 +1,13 @@
 /**
  * Created by benjamin on 4/1/17.
  */
-var particle_colors = [d3.rgb(244, 170, 66),  d3.rgb(65, 157, 244), d3.rgb(209, 16, 41), d3.rgb(18, 183, 34)]
-
-
 
 var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
     "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
     " clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
     " consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
     "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
+
 function gear_anim(svg,  width, height, x_offset, y_offset) {
 
     var width = width,
@@ -108,45 +106,60 @@ function gear_anim(svg,  width, height, x_offset, y_offset) {
 
 }
 
-var svg = d3.select("svg");
-var box = document.getElementById('graph'),
-    width = 0.9 * box.clientWidth,
-    height = box.clientHeight;
-
-svg.attr("width", width)
-    .attr("height", height);
-
-var text_box_width = width*0.45;
-var anim_box_width=width*0.5;
-var dwidth = text_box_width/3;
-var text_height =height*0.6;
-
+//content box
+//var box = document.getElementById('graph');
+//sub style
+var text_box_width = anim_box_width = "45%";
+var text_height = anim_box_height ="85%";
+var full = "100%";
 //////////////////////////////////////////////////
 //Text Box
+var svg_text = d3.select("#text")
+        .style("width", text_box_width)
+        .style("height", text_height)
+        .style("padding-bottom", "2%");
 
-var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
-var text=["climbing", "archery", "?"]
-
-var text_box = svg.append("rect")
-    .attr("width", text_box_width)
-    .attr("height", height)
-    .attr("x", 0)
-    .attr("y",0)
+var text_box = svg_text.append("rect");
+text_box.style("display", "block")
+    .style("width", full)
+    .style("height", full)
     .style("fill", d3.rgb("#348cb2").darker(0.9))
-    .style("stroke-width", 0.01*text_box_width)
+    .style("stroke-width", "1%")
     .style("stroke", d3.rgb("#348cb2").brighter(1.2));
 
-svg.append("foreignObject")
-    .attr("x", width*0.03)
-    .attr("y", height*0.07)
-    .attr("width", text_box_width-(width*0.05))
-    .attr("height", text_height)
-    .html("<h1 class='page_text'>hobbies!</h1>" +
-        "<p class='page_text'>"+desc+"</p>");
+svg_text.append("foreignObject")
+    .style("width", full)
+    .style("height", full)
+    .html("<h1 class='page_text'>Leisure Time!</h1>" +
+          "<p class='page_text'>"+desc+"</p>");
 
 
 
 
 //////////////////////////////////////////////////
 //
-gear_anim(svg,  anim_box_width, 0.75*height, text_box_width+0.05*width, 0.125*height );
+
+const div_anim = d3.select("#anim")
+        .style("display", "inline-block")
+        .style("width", anim_box_width)
+        .style("height", anim_box_height)
+    .style("padding-left", "3%");
+
+
+/*
+<!-- The grid: four columns -->
+<div class="row">
+    <div class="column">
+    <img src="img_nature.jpg" alt="Nature" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+    <img src="img_snow.jpg" alt="Snow" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+    <img src="img_mountains.jpg" alt="Mountains" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+    <img src="img_lights.jpg" alt="Lights" onclick="myFunction(this);">
+ </div>
+</div>
+*/

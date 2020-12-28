@@ -2,18 +2,17 @@
 #header{
     visibility: visible;
 }
-
 h2{
     margin-top: 3%;
     margin-bottom: 2%;
 }
 
-/* Science */
+/* pages */
 body#main{
     visibility: visible;
     background-color: #011330;
-//    background: url("images/bg.jpg") bottom left;
-//    background-size: 100% auto;
+    //background: url("images/bg.jpg") bottom left;
+    //background-size: 100% auto;
 }
 body#science {
     visibility: visible;
@@ -31,9 +30,14 @@ div.content{
     visibility: visible;
     position:fixed;
     margin-left: 10%;
-    padding-top: 2%;
-    padding-bottom: 5%;
+    margin-top: 2%;
+    margin-bottom: 5%;
     height: 90%;
+    width: 100%;
+}
+div.textBox{
+    display:block;
+
 }
 .content h1{
     font-size: 3.35em;
@@ -43,19 +47,26 @@ div.content{
     margin-bottom: 5%;
 }
 
+
 h1.page_text{
     color: ghostwhite;
+    padding-left: 2%;
+    padding-top: 1%;
 
 }
 p.page_text {
-        font-size: 2.3em;
+    width: 95%;
+    font-size: 1.7em;
     font-weight: bold;
+    line-height: 1.1em;
     color: ghostwhite;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-left: 2%;
+
 }
 div.graph{
-    margin: 0 5% 0% 5%;
+    margin: 0 5% 0% 2%;
     align-content: center;
     overflow: visible;
     width: 90%;
@@ -66,7 +77,12 @@ svg{
     width: 100%;
     height: 100%;
 }
-/* navbar*/
+
+
+
+/*
+    NAVBAR
+*/
 div.navBar{
     padding-top: 1%;
     padding-bottom: 2%;
@@ -74,39 +90,43 @@ div.navBar{
     float:left;
     display: block;
     width: 5%;
-    max-width: 100px;
-    min-width: 50px;
+    max-width: 10%;
+    min-width: 5%;
     height: 100%;
 
     background-color: #333;
     position: fixed;
 }
-ul.navBar{
+navBar ul{
     overflow: hidden;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+;
 }
 ul#contacts{
+    font-size: 0.8em;
     position: absolute;
+    width: 100%;
     bottom: 3%;
 }
 .navBar li{
     margin-top: 5%;
     width: 100%;
 }
-
 p#contacts_text{
-    padding-left: 20%;
     margin-bottom: 10%;
     font-size: 90%;
-
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
     }
-
 .navBar a {
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 10% 20%;
-    width: 100%;
+    padding: 5% 20%;
+    width: 80%;
     top: 0;
     border: hidden;
 }

@@ -6,11 +6,8 @@ var particle_names  = ["protein", "water", "sodium", "chloride"];
 
 
 
-var desc = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et " +
-    "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet" +
-    " clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet," +
-    " consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-    "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.!";
+var desc = "As biochemist and bioinformatician I have an deep interest into the biochemical stuff"
+
 function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     var particle_num = 200;
@@ -143,69 +140,64 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
     }
 }
 
-var svg = d3.select("svg");
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 var box = document.getElementById('graph'),
     width = 0.9 * box.clientWidth,
     height = box.clientHeight;
 
-svg.attr("width", width)
-    .attr("height", height);
+//sub style
+var text_box_width = anim_box_width = "45%";
+var text_height = anim_box_height ="85%";
+var full = "100%";
 
-var text_box_width = width*0.45;
-var sim_center = text_box_width+(width*0.6)/2;
-var dwidth = text_box_width/3;
-var stamps_area = [dwidth*0.1, height*0.7];
-var stamp_width = 0;
-var stamp_height = 0;
-var stamps_height =height*0.3;
-var text_height =height*0.6;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//TextBox
+var text_box = d3.select("#text")
+    .style("width", text_box_width)
+    .style("height", text_height)
+    .style("padding-bottom", "2%");
 
-if(text_box_width<=stamps_height){
-    stamp_width = dwidth*0.8 ;
-    stamp_height = stamp_width ;
-}
-else{
-    stamp_width = dwidth*0.8;
-    stamp_height = stamps_height*0.7;
-}
-
-//////////////////////////////////////////////////
-//Text Box
-
-var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
-var text=["biochemistry", "informatics", "physics"]
-
-var text_box = svg.append("rect")
-    .attr("width", text_box_width)
-    .attr("height", height)
-    .attr("x", 0)
-    .attr("y",0)
+var text_box_background = text_box.append("rect");
+text_box_background.style("display", "block")
+    .style("width", full)
+    .style("height", full)
     .style("fill", d3.rgb("#088c34").darker(0.9))
-    .style("stroke-width", 0.01*text_box_width)
+    .style("stroke-width", "1%")
     .style("stroke", d3.rgb("#088c34").brighter(1.2));
 
-svg.append("foreignObject")
-    .attr("x", width*0.03)
-    .attr("y", height*0.07)
-    .attr("width", text_box_width-(width*0.05))
-    .attr("height", text_height)
-    .html("<h1 class='page_text'>Simulation of Biochemistry!</h1>" +
-          "<p class='page_text'>"+desc+"</p>");
+var text_box_text = text_box.append("foreignObject")
+    .style("width", full)
+    .style("height", full)
+    .html("<h1 class='page_text'>Science</h1>" +
+        "<p class='page_text'>"+desc+"</p>");
 
-for( var i =0; i <3; i++){
-    svg.append("rect")
-        .attr("x", stamps_area[0]+i*dwidth)
-        .attr("y", stamps_area[1])
-        .attr("width", stamp_width)
-        .attr("height", stamp_height)
-        .style("fill", colors[i])
-    svg.append("text")
-        .attr("x", stamps_area[0]+i*dwidth+stamp_width*0.5-( stamp_width*0.035)*text[i].length)
-        .attr("y", stamps_area[1]+stamp_height*0.55)
-        .attr("class", "content")
-        .attr("font-size", stamp_width*0.15)
-        .attr("font-weight", "bold")
+//Smaller boxes
+var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
+var text=["biochemistry", "informatics", "physics"]
+var nstamps = 3;
+var stamp_height = 25;
+var stamp_width = 25;
+for( var i =0; i <nstamps; i++){
+    var stamp_rect = text_box.append("rect")
+        .style("position", "absolute")
+        .style("y", "65%")
+        .style("x", 33*i+5+"%")
+        .style("width", "25%")
+        .style("height", "25%")
+        .style("fill", colors[i]);
+
+    var stamp_text =text_box.append("foreignObject")
+        .style("width", "25%")
+        .style("height", "25%")
+        .style("position", "absolute")
+        .style("y", 75+"%")
+        .style("x", 33*i+5+"%")
+        .style("text-align", "center")
+        .style("font-size", "1.75em")
+        .style("font-weight", "bold")
         .text(text[i]);
+
 
 }
 
@@ -213,6 +205,7 @@ for( var i =0; i <3; i++){
 
 //////////////////////////////////////////////////
 //simulation_box+ coarse_sim:
+var sim_center = text_box_width+(width*0.6)/2;
 var box_width = width*0.5;
 var box_height = height*0.85;
 var box_front_p1=[sim_center*0.75, 0.1*height];
