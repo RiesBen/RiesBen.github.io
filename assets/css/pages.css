@@ -176,7 +176,7 @@ li.navBar {
 li.pages {
     height: 1.8em;
     text-align: center;
-    font-size: 1.75em;
+    font-size: 90%;
     padding-top: 2%;
 }
 
@@ -190,7 +190,7 @@ ul#contacts {
 li#contacts {
     height: 1.3em;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 90%;
     padding-top: 5%;
     width: 100%;
 }
@@ -232,7 +232,7 @@ p#contacts_text {
     left: 1%;
     top: 1%;
     color: #333;
-    font-size: 1.75em;
+    font-size: 100%;
     opacity: 0;
     transition-property: opacity;
     transition-duration: 5s;
