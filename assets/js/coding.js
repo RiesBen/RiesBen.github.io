@@ -6,51 +6,61 @@
 //stamps
 var stamps_box = d3.select("#repoStampBox");
 
-links = ["https://github.com/rinikerlab/Ensembler"]
-pic = ["https://github.com/rinikerlab/Ensembler/blob/master/devtools/logo/EnsemblerLogo_without_background.png"]
-text = ["Ensembler"]
+links = ["https://github.com/rinikerlab/Ensembler", "https://github.com/rinikerlab/restraintmaker"]
+pic = ["../data/EnsemblerLogo_with_whiteBackround.png", "../data/RestraintMaker_logo_withoutBackground.png"]
+text = ["Ensembler", "RestraintMaker"]
+colors = [d3.rgb(244, 170, 66), d3.rgb(39, 217, 7)]
 var nstamps = links.length;
 
 for (var i = 0; i < nstamps; i++) {
-    var stamp_rect = stamps_box.append("rect")
-        .style("width", "25%")
-        .style("height", "100%")
-        .style("position", "absolute")
-        .style("x", 33 * i + 5 + "%")
-        .style("fill", d3.rgb(244, 170, 66))
-        .attr("href", links[i]);
-
-    stamps_box.append("foreignObject")
-        .text("Ensembler")
-        .style("width", "25%")
-        .style("height", "100%")
-        .style("position", "absolute")
-        .style("y", "40%")
-        .style("x", 33 * i + 5 + "%")
-        .style("text-align", "center")
-        .style("font-size", "1.75em")
-        .style("font-weight", "bold");
-
-    //.append("svg:image")
-    //.attr("xlink:href", pic[i]);
-
+    var tmp_id =  "bg"+i
+    var tmp_color = colors[i]
     function openLink() {
         var me = d3.select(this);
         window.open(me.node().getAttribute("href"))
     }
 
     function onhover() {
-        d3.select(this).style("fill", d3.rgb(244, 170, 66).brighter(0.5))
+        var tid = d3.select(this).attr("Tid")
+        var col = d3.select("#"+tid).attr("hcolor")
+        d3.select("#"+tid).style("fill", col)
     }
 
     function outhover() {
-        d3.select(this).style("fill", d3.rgb(244, 170, 66))
+        var tid = d3.select(this).attr("Tid")
+        var col = d3.select("#"+tid).attr("color")
+        d3.select("#"+tid).style("fill", col)
     }
 
-    stamp_rect.on('click', openLink)
-    stamp_rect.on("mouseover", onhover)
-    stamp_rect.on("mouseout", outhover)
+    stamps_box.append("rect")
+        .style("width", "25%")
+        .style("height", "100%")
+        .style("position", "absolute")
+        .style("x", 33 * i + 5 + "%")
+        .style("fill", tmp_color)
+        .attr("color", tmp_color)
+        .attr("hcolor", tmp_color.brighter(0.5))
+        .attr("id", tmp_id)
+        .attr("href", links[i]);
 
+    stamps_box.append("svg:image")
+        .style("x", 33 * i + 5 + "%")
+        .style("y", "0%")
+        .style("height", "100%")
+        .attr('width', "25%")
+        .attr("align", "center")
+        .attr("xlink:href", pic[i]);
+
+    stamps_box.append("rect")
+        .style("width", "25%")
+        .style("height", "100%")
+        .style("position", "absolute")
+        .style("opacity", "0")
+        .style("x", 33 * i + 5 + "%")
+        .attr("Tid", tmp_id)
+        .on('click', openLink)
+        .on("mouseover", onhover)
+        .on("mouseout", outhover);
 
 }
 
