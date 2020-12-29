@@ -2,7 +2,6 @@
  * Created by benjamin on 4/1/17.
  */
 
-var desc = "Next to a cup of coffe and my hiking boots...."
 function gear_anim(svg,  width, height, x_offset, y_offset) {
 
     var width = width,
@@ -101,42 +100,20 @@ function gear_anim(svg,  width, height, x_offset, y_offset) {
 
 }
 
-//content box
-//var box = document.getElementById('graph');
-//sub style
-var text_box_width = anim_box_width = "45%";
-var text_height = anim_box_height ="85%";
-var full = "100%";
-//////////////////////////////////////////////////
-//Text Box
-var svg_text = d3.select("#text")
-        .style("width", text_box_width)
-        .style("height", text_height)
-        .style("padding-bottom", "2%");
-
-var text_box = svg_text.append("rect");
-text_box.style("display", "block")
-    .style("width", full)
-    .style("height", full)
-    .style("fill", d3.rgb("#348cb2").darker(0.9))
-    .style("stroke-width", "1%")
-    .style("stroke", d3.rgb("#348cb2").brighter(1.2));
-
-svg_text.append("foreignObject")
-    .style("width", full)
-    .style("height", full)
-    .html("<h1 class='page_text'>Leisure Time!</h1>" +
-          "<p class='page_text'>"+desc+"</p>");
-
 
 //////////////////////////////////////////////////
 //
 
-const div_anim = d3.select("#anim")
-        .style("display", "inline-block")
-        .style("width", anim_box_width)
-        .style("height", anim_box_height)
-    .style("padding-left", "3%");
+const anim_div = d3.select("#animation")
+
+anim_box_width = anim_div.node().getBoundingClientRect().width;
+anim_box_height = anim_div.node().getBoundingClientRect().height;
+
+var gears_svg = anim_div.append("svg")
+    .style("width", anim_box_width)
+    .style("height", anim_box_height);
+
+gear_anim(gears_svg, anim_box_width, anim_box_height)
 
 
 /*

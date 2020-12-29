@@ -1,13 +1,39 @@
 /**
  * Created by benjamin on 4/1/17.
  */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//TextBox
+var stamps_box = d3.select("#pubStampBox")
+
+//Smaller boxes
+var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
+var text=["biochemistry", "informatics", "physics"]
+var nstamps = 3;
+
+for( var i =0; i <nstamps; i++){
+    var stamp_rect = stamps_box.append("rect")
+        .style("width", "25%")
+        .style("height", "100%")
+        .style("position", "absolute")
+        .style("x", 33*i+5+"%")
+        .style("fill", colors[i]);
+
+    var stamp_text =stamps_box.append("foreignObject")
+        .style("width", "25%")
+        .style("height", "100%")
+        .style("position", "absolute")
+        .style("y", "40%")
+        .style("x", 33*i+5+"%")
+        .style("text-align", "center")
+        .style("font-size", "1.75em")
+        .style("font-weight", "bold")
+        .text(text[i]);
+}
+
+//////////////////////////////////////////////////
 var particle_colors = [d3.rgb(244, 170, 66),  d3.rgb(65, 157, 244), d3.rgb(209, 16, 41), d3.rgb(18, 183, 34)]
 var particle_names  = ["protein", "water", "sodium", "chloride"];
-
-
-
-var desc = "As a biochemist and bioinformatician, I am excited about biology, chemistry, and physics. My focus is on biomolecules, their complex structure, and function. I love to investigate such molecules with computational methods and help to find answers to fundamental scientific or drug design questions."
-
 
 function coarseSim(svg,  width, height, x_offset, y_offset) {
     //simBox
@@ -69,19 +95,19 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
         .gravity(0.25)
         .chargeDistance(0.1*width)
         .charge(function(d, i) {
-        if(i == protein_index+1){   //prot
-            return -5000;
-        }
-        else if(i % salt_conc == 2){   //Na
-            return +300;
-        }
-        else if(i % salt_conc == 1){   //Cl
-            return -300;
-        }
-        else{
-            return  -3; }})
+            if(i == protein_index+1){   //prot
+                return -5000;
+            }
+            else if(i % salt_conc == 2){   //Na
+                return +300;
+            }
+            else if(i % salt_conc == 1){   //Cl
+                return -300;
+            }
+            else{
+                return  -3; }})
         .nodes(nodes)
-        .size([x_offset + width*0.5, y_offset+height]);
+        .size([x_offset + width*0.75, y_offset+height]);
 
     force.start();
     svg.style("width", width)
@@ -130,21 +156,21 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     svg.selectAll("circle")
     force.on("tick", function(e) {
-      var q = d3.geom.quadtree(nodes),
-          i = 0,
-          n = nodes.length;
+        var q = d3.geom.quadtree(nodes),
+            i = 0,
+            n = nodes.length;
 
-      while (++i < n) q.visit(collide(nodes[i]));
+        while (++i < n) q.visit(collide(nodes[i]));
         svg.selectAll("circle")
-          .attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; });
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
     });
 
     svg.on("mousemove", function() {
-      var p1 = d3.mouse(this);
-      root.px = p1[0];
-      root.py = p1[1];
-      force.resume();
+        var p1 = d3.mouse(this);
+        root.px = p1[0];
+        root.py = p1[1];
+        force.resume();
     });
 
     svg.on("MozOrientation", function() {
@@ -206,19 +232,20 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
 
     var rect_color=particle_colors;
     var rect_text=particle_names;
-    var rect_width = box_width/8
-    var rect_height = 0.1*(height - box_height)
-
+    var rect_width = box_width/8;
+    var rect_height = 0.1*(height - box_height);
+    var offset = rect_width*2.75;
+    var start_offset = -rect_width
     for( var i =0; i <4; i++) {
         svg.append("rect")
-            .attr("x", box_front_p1[0] + i* rect_width*2)
+            .attr("x", box_front_p1[0] + i* offset +start_offset)
             .attr("y", box_front_p4[1] + (rect_height*1.5))
             .style("stroke", d3.rgb("#555555"))
             .attr("width", rect_width)
             .attr("height", rect_height)
             .style("fill", rect_color[i]);
         svg.append("text")
-            .attr("x", box_front_p1[0] + (i+0.5)*rect_width*2+3)
+            .attr("x", box_front_p1[0] + (i+0.4)*offset+start_offset)
             .attr("y", box_front_p4[1] + (rect_height*2.3))
             .attr("class", "content")
             .attr("font-size", 12)
@@ -227,84 +254,20 @@ function coarseSim(svg,  width, height, x_offset, y_offset) {
     }
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-var box = document.getElementById('graph'),
-    width = 0.9 * box.clientWidth,
-    height = box.clientHeight;
-
-//sub style
-var text_box_width = anim_box_width = "45%";
-var text_height = anim_box_height ="85%";
-var full = "100%";
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//TextBox
-var text_box = d3.select("#text")
-    .style("width", text_box_width)
-    .style("height", text_height)
-    .style("padding-bottom", "2%");
-
-var text_box_background = text_box.append("rect");
-text_box_background.style("display", "block")
-    .style("width", full)
-    .style("height", full)
-    .style("fill", d3.rgb("#088c34").darker(0.9))
-    .style("stroke-width", "1%")
-    .style("stroke", d3.rgb("#088c34").brighter(1.2));
-
-var text_box_text = text_box.append("foreignObject")
-    .style("width", full)
-    .style("height", "60%")
-    .style("font-size", "1.6em")
-    .html("<h1 class='page_text'>How the world works!</h1>" +
-        "<p class='page_text'>"+desc+"</p>");
-
-//Smaller boxes
-var colors=[d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
-var text=["biochemistry", "informatics", "physics"]
-var nstamps = 3;
-var stamp_height = 25;
-var stamp_width = 25;
-for( var i =0; i <nstamps; i++){
-    var stamp_rect = text_box.append("rect")
-        .style("width", "25%")
-        .style("height", "25%")
-        .style("position", "absolute")
-        .style("y", "65%")
-        .style("x", 33*i+5+"%")
-        .style("fill", colors[i]);
-
-    var stamp_text =text_box.append("foreignObject")
-        .style("width", "25%")
-        .style("height", "25%")
-        .style("position", "absolute")
-        .style("y", 75+"%")
-        .style("x", 33*i+5+"%")
-        .style("text-align", "center")
-        .style("font-size", "1.75em")
-        .style("font-weight", "bold")
-        .text(text[i]);
-
-
-}
-
-//////////////////////////////////////////////////
 //simulation_box+ coarse_sim:
-var svg_simBox = d3.select("#anim")
-    .style("display", "inline-block")
-    .style("width", anim_box_width)
-    .style("height", anim_box_height)
-    .style("padding-left", "3%")
-    .style("padding-bottom", "2%")
-    .style("viewBox", "0 0 300 600");
+var anim_div = d3.select("#animation");
 
-var box = svg_simBox.node().getBoundingClientRect();
-console.log(box)
+anim_width = anim_div.node().getBoundingClientRect().width;
+anim_box_height = anim_div.node().getBoundingClientRect().height;
 
-var box_height  = box.height*0.9;
-var box_width = box.width*1.5;
-var x_offset = width*0.03;
-var y_offset = height*0.01;
+var simBox = anim_div.append("svg")
+    .style("width", anim_width)
+    .style("height", anim_box_height);
+//    .style("viewBox", "0 0 300 600");
 
-coarseSim( svg_simBox, box_width, box_height, x_offset, y_offset);
+var box_height  = anim_box_height;
+var box_width = anim_width;
+var x_offset = anim_width*0.25;
+var y_offset = 0;
+
+coarseSim( simBox, box_width, box_height, x_offset, y_offset);

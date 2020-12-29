@@ -2,59 +2,65 @@
  * Created by benjamin on 4/1/17.
  */
 
-
-var desc = "During my bioinformatics studies, I could experience many different coding languages and enjoyed learning their various aspects. Additionally, programming paradigms like object-oriented programming and functional programming were part of the curriculum. Furthermore, I enjoyed learning how to think in parallel programming, high-performance computing, and machine learning."
-//content box
-//var box = document.getElementById('graph');
-//sub style
-var text_box_width = anim_box_width = "45%";
-var text_height = anim_box_height ="85%";
-var full = "100%";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// build text
-var box = document.getElementById('graph'),
-    width = 0.9*box.clientWidth,
-    height = box.clientHeight;
+//stamps
+var stamps_box =  d3.select("#RepoStampBox") ;
 
-// main svg
-var text_box = d3.select("#text")
-    .style("width", text_box_width)
-    .style("padding-bottom", "2%");
+var nstamps = 1;
+links = ["https://github.com/rinikerlab/Ensembler"]
+pic = ["https://github.com/rinikerlab/Ensembler/blob/master/devtools/logo/EnsemblerLogo_without_background.png"]
 
-var text_box_rect = text_box.append("rect")
-    .style("width", full)
-    .style("height", text_height)
-    .style("fill", d3.rgb("#990000").darker(0.9))
-    .style("stroke-width", "1%")
-    .style("stroke", d3.rgb("#990000").brighter(1.2));
+for( var i =0; i <nstamps; i++){
+    var stamp_rect = stamps_box.append("rect")
+        .style("width", "25%")
+        .style("height", "95%")
+        //.style("position", "absolute")
+        .style("x", 33*i+5+"%")
+        .style("fill", d3.rgb(244, 170, 66))
+        .attr("href", links[i])
+        .text("Ensembler")
+        .style("font-size", "1em")
+        .style("font-color", "ghostwhite");
+        //.append("svg:image")
+        //.attr("xlink:href", pic[i]);
 
-text_box.append("foreignObject")
-    .style("width", full)
-    .style("height", full)
-    .html("<h1 class='page_text'>I like programming!</h1>" +
-        "<p class='page_text'>"+desc+"</p>");
+    function openLink()
+    {
+        var me = d3.select(this);
+        window.open(me.node().getAttribute("href"))
+    }
+    function onhover(){
+        d3.select(this).style("fill", d3.rgb(244, 170, 66).brighter(0.5))
+    }
+    function outhover(){
+        d3.select(this).style("fill", d3.rgb(244, 170, 66))
+    }
+    stamp_rect.on('click', openLink)
+    stamp_rect.on("mouseover", onhover)
+    stamp_rect.on("mouseout", outhover)
+
+
+}
 
 ////////////////////////////////////////////////////////////
 //build Dendrogram:
 
-var anim_div = d3.select("#anim")
-    .style("display", "inline-block")
-    .style("width", anim_box_width)
-    .style("height", anim_box_height)
-    .style("padding-left", "3%");
+var anim_div = d3.select("#animation")
+
+anim_width = anim_div.node().getBoundingClientRect().width;
+anim_box_height = anim_div.node().getBoundingClientRect().height;
 
 var dendro = anim_div.append("svg")
-    .attr("x", 0)
-    .attr("y", 0)
-    .style("width", width)
-    .style("height", height);
-
+    .style("width", anim_width)
+    .style("height", anim_box_height);
 
 function buildDendrogam(width, height) {
-    var dendrogram_width = width;
-    var bar_width = width;
+    var dendrogram_width = width*0.4;
+    var bar_width = width*0.45;
+    var y_offset = height*0.07
+    height = height*0.9
 
-    g = dendro.append("g").attr("transform", "translate(0,0)");       // move right 20px.
+    g = dendro.append("g").attr("transform", "translate("+width*0.05+","+y_offset+")");       // move right 20px.
 
 
     //bar-plot
@@ -216,4 +222,4 @@ function buildDendrogam(width, height) {
 }
 
 // building dendrogram:
-buildDendrogam(width*0.25, height*0.8);
+buildDendrogam(anim_width, anim_box_height);
