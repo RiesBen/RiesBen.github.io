@@ -11,6 +11,12 @@ h2{
 }
 
 /* pages */
+body{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
 body#main{
     visibility: visible;
     background-color: #011330;
@@ -39,7 +45,7 @@ div.content{
     margin-top: 2%;
     margin-bottom: 1%;
     height: 93%;
-    width: 90%;
+    width: 100%;
 }
 
 .content h1{
@@ -67,7 +73,7 @@ div.animation_box {
     grid-column: 2;
     grid-row: 1;
 }
-.stampBox, .pubStampBox{
+.repoStampBox, .pubStampBox{
     width: 100%;
     height: 25%;
     margin-top: 2%;
@@ -102,7 +108,7 @@ h2.page_text{
 }
 p.page_text {
     width: 100%;
-    height: 57%;
+    height: 50%;
     padding-left: 2%;
     padding-right: 2%;
     font-size: 1.7em;
@@ -137,6 +143,7 @@ div.navBar{
 
     background-color: #333;
     position: fixed;
+    transition-duration: 2s;
 }
 ul.navBar{
     overflow: hidden;
@@ -150,7 +157,7 @@ li.navBar{
     padding-top: 5%;
     width: 100%;
 }
-li#pages{
+li.pages{
     height: 1.8em;
     text-align: center;
     font-size: 1.75em;
@@ -201,6 +208,18 @@ p#contacts_text{
         color: white;
     }
 
+#hiderTwo{
+    left: 1%;
+    top: 1%;
+    color:#333;
+    font-size: 1.75em;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 5s;
+}
+#hiderTwo:hover{
+    color:ghostwhite;
+}
 
 form {
     position: absolute;
