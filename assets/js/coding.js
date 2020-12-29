@@ -74,7 +74,9 @@ anim_box_height = anim_div.node().getBoundingClientRect().height;
 
 var dendro = anim_div.append("svg")
     .style("width", anim_width)
-    .style("height", anim_box_height);
+    .style("height", anim_box_height)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 6 00 400")
 
 function buildDendrogam(width, height) {
     var dendrogram_width = width * 0.4;

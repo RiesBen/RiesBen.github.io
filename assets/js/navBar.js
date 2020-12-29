@@ -32,9 +32,8 @@ function hide_navB() {
     }
     //adjust margin
     var content = document.getElementById('content');
-    content.style.setProperty("transition-property", "margin-left")
-    content.style.setProperty("transition-duration", "2s")
     content.style.setProperty("margin-left", "2%")
+    content.style.setProperty("width", "98%")
 
     link_hide.style.setProperty("opacity", "1");
 
@@ -54,6 +53,8 @@ function show_navB() {
 
     var content = document.getElementById('content');
     content.style.setProperty("margin-left", "8%")
+    content.style.setProperty("width", "92%")
+
 
     var link_hide = document.getElementById('hiderTwo');
     link_hide.style.setProperty("transition-duration", "2s")
