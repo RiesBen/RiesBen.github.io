@@ -69,7 +69,7 @@ for (var i = 0; i < nstamps; i++) {
 
 var anim_div = d3.select("#animation")
 
-anim_width = anim_div.node().getBoundingClientRect().width * 0.8;
+anim_width = anim_div.node().getBoundingClientRect().width ;
 anim_box_height = anim_div.node().getBoundingClientRect().height;
 
 var dendro = anim_div.append("svg")
