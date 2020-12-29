@@ -2,7 +2,7 @@
  * Created by benjamin on 4/1/17.
  */
 
-function gear_anim(svg,  width, height, x_offset, y_offset) {
+function gear_anim(svg, width, height, x_offset, y_offset) {
 
     var width = width,
         height = height,
@@ -18,7 +18,7 @@ function gear_anim(svg,  width, height, x_offset, y_offset) {
         .attr("width", width)
         .attr("height", height)
         .attr("x", x_offset)
-        .attr("y",y_offset)
+        .attr("y", y_offset)
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(.55)")
         .append("g");
@@ -61,14 +61,16 @@ function gear_anim(svg,  width, height, x_offset, y_offset) {
 
     d3.selectAll("input[name=reference]")
         .data([radius * 5, Infinity, -radius])
-        .on("change", function(radius1) {
+        .on("change", function (radius1) {
             var radius0 = frame.datum().radius, angle = (Date.now() - start) * speed;
             frame.datum({radius: radius1});
             svg.attr("transform", "rotate(" + (offset += angle / radius0 - angle / radius1) + ")");
         });
 
     d3.selectAll("input[name=speed]")
-        .on("change", function() { speed = +this.value; });
+        .on("change", function () {
+            speed = +this.value;
+        });
 
     function gear(d) {
         var n = d.teeth,
@@ -91,9 +93,11 @@ function gear_anim(svg,  width, height, x_offset, y_offset) {
         return path.join("");
     }
 
-    d3.timer(function() {
+    d3.timer(function () {
         var angle = (Date.now() - start) * speed,
-            transform = function(d) { return "rotate(" + angle / d.radius + ")"; };
+            transform = function (d) {
+                return "rotate(" + angle / d.radius + ")";
+            };
         frame.selectAll("path").attr("transform", transform);
         frame.attr("transform", transform); // frame of reference
     });

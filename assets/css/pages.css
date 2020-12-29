@@ -1,46 +1,52 @@
 /* MainPage */
-#header{
+#header {
     visibility: visible;
 }
+
 h1 h2 h3 p {
     color: ghostwhite;
 }
-h2{
+
+h2 {
     margin-top: 3%;
     margin-bottom: 2%;
 }
 
 /* pages */
-body{
+body {
     height: 100%;
     width: 100%;
     position: absolute;
 }
 
-body#main{
+body#main {
     visibility: visible;
     background-color: #011330;
-    //background: url("images/bg.jpg") bottom left;
-    //background-size: 100% auto;
+/ / background: url("images/bg.jpg") bottom left;
+/ / background-size: 100 % auto;
 }
+
 body#science {
     visibility: visible;
     background-color: #088c34;
 }
-body#coding{
+
+body#coding {
     visibility: visible;
     background-color: #990000;
 }
-body#hobbies{
+
+body#hobbies {
     visibility: visible;
     background-color: #348cb2;
 }
+
 /*
     contentbox
 */
-div.content{
+div.content {
     visibility: visible;
-    position:fixed;
+    position: fixed;
     margin-left: 8%;
     margin-top: 2%;
     margin-bottom: 1%;
@@ -48,7 +54,7 @@ div.content{
     width: 100%;
 }
 
-.content h1{
+.content h1 {
     font-size: 3.35em;
     font-weight: 900;
     letter-spacing: -0.035em;
@@ -56,7 +62,8 @@ div.content{
     margin-bottom: 3%;
     height: 7%;
 }
-div.subcontent{
+
+div.subcontent {
     overflow: hidden;
     width: 100%;
     height: 85%;
@@ -65,15 +72,18 @@ div.subcontent{
     grid-gap: 1%;
     grid-auto-rows: minmax(45%, 100%);
 }
+
 div.textBox {
     grid-column: 1;
     grid-row: 1;
 }
+
 div.animation_box {
     grid-column: 2;
     grid-row: 1;
 }
-.repoStampBox, .pubStampBox{
+
+.repoStampBox, .pubStampBox {
     width: 100%;
     height: 25%;
     margin-top: 2%;
@@ -87,25 +97,29 @@ div.animation_box {
     border-color: #09c648;
     border-width: medium;
 }
+
 #codingBox {
     background: rgba(71, 1, 1, 1);
     border-style: solid;
     border-color: #ea0202;
     border-width: medium;
 }
-#hobbiesBox {
-     background: #215971;
-     border-style: solid;
-     border-color: #49bbec;
-     border-width: medium;
- }
 
-h2.page_text{
+#hobbiesBox {
+    background: #215971;
+    border-style: solid;
+    border-color: #49bbec;
+    border-width: medium;
+}
+
+h2.page_text {
     padding-left: 2%;
     height: 10%;
-    font-size: 2.75em;
+    font-size: 175%;
     font-weight: bold;
+    overflow: hidden;
 }
+
 p.page_text {
     width: 100%;
     height: 50%;
@@ -120,7 +134,7 @@ p.page_text {
 }
 
 
-svg{
+svg {
     overflow: visible;
     width: 100%;
     height: 100%;
@@ -130,11 +144,11 @@ svg{
 /*
     NAVBAR
 */
-div.navBar{
+div.navBar {
     padding-top: 1%;
     padding-bottom: 2%;
     visibility: visible;
-    float:left;
+    float: left;
     display: block;
     width: 5%;
     max-width: 10%;
@@ -145,49 +159,53 @@ div.navBar{
     position: fixed;
     transition-duration: 2s;
 }
-ul.navBar{
+
+ul.navBar {
     overflow: hidden;
     align-items: center;
     align-content: center;
-    width: 100%;
-;
+    width: 100%;;
 }
-li.navBar{
+
+li.navBar {
     position: absolute;
     padding-top: 5%;
     width: 100%;
 }
-li.pages{
+
+li.pages {
     height: 1.8em;
     text-align: center;
     font-size: 1.75em;
     padding-top: 2%;
 }
 
-ul#contacts{
+ul#contacts {
     position: absolute;
     width: 100%;
     bottom: 1%;
 
 }
+
 li#contacts {
     height: 1.3em;
     text-align: center;
     font-size: 1.1em;
     padding-top: 5%;
     width: 100%;
-
 }
-h2#contact{
+
+h2#contact {
     padding-top: 5%;
 }
-p#contacts_text{
+
+p#contacts_text {
     margin-bottom: 10%;
     text-decoration: underline;
-    text-underline-offset:  0.2em;
+    text-underline-offset: 0.2em;
     font-family: 'Source Sans Pro', sans-serif;
     text-align: center;
-    }
+}
 
 .navBar a {
     float: left;
@@ -199,26 +217,29 @@ p#contacts_text{
     top: 0;
     border: hidden;
 }
-    .navBar a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-    .navBar a:active{
-        background-color: #4CAF50;
-        color: white;
-    }
 
-#hiderTwo{
+.navBar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navBar a:active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#hiderTwo {
     left: 1%;
     top: 1%;
-    color:#333;
+    color: #333;
     font-size: 1.75em;
     opacity: 0;
     transition-property: opacity;
     transition-duration: 5s;
 }
-#hiderTwo:hover{
-    color:ghostwhite;
+
+#hiderTwo:hover {
+    color: ghostwhite;
 }
 
 form {

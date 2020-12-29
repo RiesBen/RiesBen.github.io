@@ -4,19 +4,19 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //stamps
-var stamps_box =  d3.select("#repoStampBox") ;
+var stamps_box = d3.select("#repoStampBox");
 
 links = ["https://github.com/rinikerlab/Ensembler"]
 pic = ["https://github.com/rinikerlab/Ensembler/blob/master/devtools/logo/EnsemblerLogo_without_background.png"]
 text = ["Ensembler"]
 var nstamps = links.length;
 
-for( var i =0; i <nstamps; i++){
+for (var i = 0; i < nstamps; i++) {
     var stamp_rect = stamps_box.append("rect")
         .style("width", "25%")
         .style("height", "100%")
         .style("position", "absolute")
-        .style("x", 33*i+5+"%")
+        .style("x", 33 * i + 5 + "%")
         .style("fill", d3.rgb(244, 170, 66))
         .attr("href", links[i]);
 
@@ -26,25 +26,27 @@ for( var i =0; i <nstamps; i++){
         .style("height", "100%")
         .style("position", "absolute")
         .style("y", "40%")
-        .style("x", 33*i+5+"%")
+        .style("x", 33 * i + 5 + "%")
         .style("text-align", "center")
         .style("font-size", "1.75em")
         .style("font-weight", "bold");
 
-        //.append("svg:image")
-        //.attr("xlink:href", pic[i]);
+    //.append("svg:image")
+    //.attr("xlink:href", pic[i]);
 
-    function openLink()
-    {
+    function openLink() {
         var me = d3.select(this);
         window.open(me.node().getAttribute("href"))
     }
-    function onhover(){
+
+    function onhover() {
         d3.select(this).style("fill", d3.rgb(244, 170, 66).brighter(0.5))
     }
-    function outhover(){
+
+    function outhover() {
         d3.select(this).style("fill", d3.rgb(244, 170, 66))
     }
+
     stamp_rect.on('click', openLink)
     stamp_rect.on("mouseover", onhover)
     stamp_rect.on("mouseout", outhover)
@@ -57,7 +59,7 @@ for( var i =0; i <nstamps; i++){
 
 var anim_div = d3.select("#animation")
 
-anim_width = anim_div.node().getBoundingClientRect().width*0.8;
+anim_width = anim_div.node().getBoundingClientRect().width * 0.8;
 anim_box_height = anim_div.node().getBoundingClientRect().height;
 
 var dendro = anim_div.append("svg")
@@ -65,12 +67,12 @@ var dendro = anim_div.append("svg")
     .style("height", anim_box_height);
 
 function buildDendrogam(width, height) {
-    var dendrogram_width = width*0.4;
-    var bar_width = width*0.45;
-    var y_offset = height*0.07
-    height = height*0.9
+    var dendrogram_width = width * 0.4;
+    var bar_width = width * 0.45;
+    var y_offset = height * 0.07
+    height = height * 0.9
 
-    g = dendro.append("g").attr("transform", "translate("+width*0.05+","+y_offset+")");       // move right 20px.
+    g = dendro.append("g").attr("transform", "translate(" + width * 0.05 + "," + y_offset + ")");       // move right 20px.
 
 
     //bar-plot

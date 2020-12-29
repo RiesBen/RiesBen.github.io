@@ -1,19 +1,19 @@
 //Build nav bar
 
 
-function hide_navB(){
+function hide_navB() {
     var box = document.getElementById('navbar');
     // Code for Chrome, Safari, Opera
     box.style.WebkitTransform = "translate(-100%)";
-    box.innerHtml =" asd";
+    box.innerHtml = " asd";
     // Code for IE9
     box.style.msTransform = "translate(-100%)";
     // Standard syntax
     box.style.transform = "translate(-100%)";
 
     ////link back home
-    var box = document.getElementsByTagName('body')[0];
-    if(document.getElementById("hiderTwo") == null){
+    box = document.getElementsByTagName('body')[0];
+    if (document.getElementById("hiderTwo") == null) {
         var link_hide = document.createElement("a")
         link_hide.className = "icon  fa-bars pages"
         link_hide.id = "hiderTwo"
@@ -25,9 +25,8 @@ function hide_navB(){
         text_hide.className = "label"
         link_hide.appendChild(text_hide)
         box.append(link_hide)
-    }
-    else{
-        var link_hide = document.getElementById("hiderTwo");
+    } else {
+        link_hide = document.getElementById("hiderTwo");
         link_hide.style.setProperty("transition-duration", "5s")
         link_hide.style.setProperty("opacity", "1");
     }
@@ -35,33 +34,34 @@ function hide_navB(){
     var content = document.getElementById('content');
     content.style.setProperty("transition-property", "margin-left")
     content.style.setProperty("transition-duration", "2s")
-    content.style.setProperty("margin-left", "2%" )
+    content.style.setProperty("margin-left", "2%")
 
     link_hide.style.setProperty("opacity", "1");
 
 
-
 }
-function show_navB(){
+
+function show_navB() {
     var box = document.getElementById('navbar');
 
     // Code for Chrome, Safari, Opera
     box.style.WebkitTransform = "translate(0%)";
-    box.innerHtml =" asd";
+    box.innerHtml = " asd";
     // Code for IE9
     box.style.msTransform = "translate(0%)";
     // Standard syntax
     box.style.transform = "translate(0%)";
 
     var content = document.getElementById('content');
-    content.style.setProperty("margin-left", "8%" )
+    content.style.setProperty("margin-left", "8%")
 
     var link_hide = document.getElementById('hiderTwo');
     link_hide.style.setProperty("transition-duration", "2s")
     link_hide.style.setProperty("opacity", "0")
 
 }
-function build_navB(){
+
+function build_navB() {
 //////////////////////////////////////////////////
     var box = document.getElementById('navbar');
 
@@ -103,7 +103,7 @@ function build_navB(){
     link_science.className = "icon  fa-flask"
     var text_science = document.createElement("span")
     text_science.textContent = "scientific interest"
-    text_science.className="label"
+    text_science.className = "label"
     link_science.appendChild(text_science)
     li_two.appendChild(link_science)
 ////link back coding
