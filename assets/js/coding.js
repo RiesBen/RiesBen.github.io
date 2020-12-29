@@ -17,7 +17,8 @@ for (var i = 0; i < nstamps; i++) {
     var tmp_color = colors[i]
     function openLink() {
         var me = d3.select(this);
-        window.open(me.node().getAttribute("href"))
+        console.log(me.attr("href"))
+        window.open(me.attr("href"))
     }
 
     function onhover() {
@@ -41,14 +42,12 @@ for (var i = 0; i < nstamps; i++) {
         .attr("color", tmp_color)
         .attr("hcolor", tmp_color.brighter(0.5))
         .attr("id", tmp_id)
-        .attr("href", links[i]);
 
     stamps_box.append("svg:image")
-        .style("x", 33 * i + 5 + "%")
-        .style("y", "0%")
         .style("height", "100%")
-        .attr('width', "25%")
-        .attr("align", "center")
+        .style('width', "25%")
+        .style("position", "absolute")
+        .style("x", 33 * i + 5 + "%")
         .attr("xlink:href", pic[i]);
 
     stamps_box.append("rect")
@@ -58,6 +57,7 @@ for (var i = 0; i < nstamps; i++) {
         .style("opacity", "0")
         .style("x", 33 * i + 5 + "%")
         .attr("Tid", tmp_id)
+        .attr("href", links[i])
         .on('click', openLink)
         .on("mouseover", onhover)
         .on("mouseout", outhover);
