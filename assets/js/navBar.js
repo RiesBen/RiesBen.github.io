@@ -143,13 +143,7 @@ function build_navB() {
     list_two.id = "contacts"
     list_two.setAttribute("width", "100%")
 
-//link contacts
-    var li_t_one = document.createElement("li")
-    li_t_one.id = "contacts"
-    var li_t_one_text = document.createElement("p")
-    li_t_one_text.textContent = "contact"
-    li_t_one_text.id = "contacts_text"
-    li_t_one.appendChild(li_t_one_text)
+
 //// link mail
     var li_t_two = document.createElement("li")
     li_t_two.id = "contacts"
@@ -185,7 +179,6 @@ function build_navB() {
     li_t_four.appendChild(link_git)
 
 // append to second link
-    list_two.appendChild(li_t_one)
     list_two.appendChild(li_t_two)
     list_two.appendChild(li_t_three)
     list_two.appendChild(li_t_four)

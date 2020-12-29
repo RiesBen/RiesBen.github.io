@@ -5,6 +5,8 @@
 
 h1 h2 h3 p {
     color: ghostwhite;
+    overflow-x: auto;
+    overflow-y: paged-x;
 }
 
 h2 {
@@ -151,8 +153,6 @@ div.navBar {
     float: left;
     display: block;
     width: 5%;
-    max-width: 10%;
-    min-width: 5%;
     height: 100%;
 
     background-color: #333;
@@ -161,36 +161,38 @@ div.navBar {
 }
 
 ul.navBar {
+    height: 60%;
     overflow: hidden;
     align-items: center;
     align-content: center;
-    width: 100%;;
+    width: 100%;
 }
 
 li.navBar {
     position: absolute;
-    padding-top: 5%;
     width: 100%;
+    height: 20%;
 }
 
 li.pages {
     height: 1.8em;
     text-align: center;
-    font-size: 90%;
+    font-size: 100%;
     padding-top: 2%;
 }
 
 ul#contacts {
     position: absolute;
     width: 100%;
+    height: 20%;
     bottom: 1%;
 
 }
 
 li#contacts {
-    height: 1.3em;
+    height: 33%;
     text-align: center;
-    font-size: 90%;
+    font-size: 100%;
     padding-top: 5%;
     width: 100%;
 }
