@@ -9,39 +9,32 @@ var stamps_box = d3.select("#repoStampBox");
 links = ["https://github.com/rinikerlab/Ensembler", "https://github.com/rinikerlab/restraintmaker"]
 pic = ["../data/EnsemblerLogo_with_whiteBackround.png", "../data/RestraintMaker_logo_withoutBackground.png"]
 text = ["Ensembler", "RestraintMaker"]
-colors = [d3.rgb(244, 170, 66), d3.rgb(39, 217, 7)]
+colors = [d3.rgb(256, 256, 256), d3.rgb(39, 217, 7)]
 var nstamps = links.length;
 
 for (var i = 0; i < nstamps; i++) {
-    var tmp_id =  "bg"+i
-    var tmp_color = colors[i]
+
+    var tmp_color = colors[i];
+
     function openLink() {
         var me = d3.select(this);
-        console.log(me.attr("href"))
         window.open(me.attr("href"))
     }
 
     function onhover() {
-        var tid = d3.select(this).attr("Tid")
-        var col = d3.select("#"+tid).attr("hcolor")
-        d3.select("#"+tid).style("fill", col)
+        d3.select(this).style("visibility", "hidden")
     }
 
     function outhover() {
-        var tid = d3.select(this).attr("Tid")
-        var col = d3.select("#"+tid).attr("color")
-        d3.select("#"+tid).style("fill", col)
+        d3.select(this).style("visibility", "visible")
     }
 
     stamps_box.append("rect")
-        .style("width", "25%")
         .style("height", "100%")
+        .style("width", "25%")
         .style("position", "absolute")
         .style("x", 33 * i + 5 + "%")
-        .style("fill", tmp_color)
-        .attr("color", tmp_color)
-        .attr("hcolor", tmp_color.brighter(0.5))
-        .attr("id", tmp_id)
+        .style("fill", tmp_color);
 
     stamps_box.append("svg:image")
         .style("height", "100%")
@@ -51,17 +44,16 @@ for (var i = 0; i < nstamps; i++) {
         .attr("xlink:href", pic[i]);
 
     stamps_box.append("rect")
-        .style("width", "25%")
         .style("height", "100%")
+        .style("width", "25%")
         .style("position", "absolute")
-        .style("opacity", "0")
         .style("x", 33 * i + 5 + "%")
-        .attr("Tid", tmp_id)
+        .style("opacity", "0.3")
+        .style("fill", d3.rgb(55, 55, 55))
         .attr("href", links[i])
         .on('click', openLink)
         .on("mouseover", onhover)
         .on("mouseout", outhover);
-
 }
 
 ////////////////////////////////////////////////////////////

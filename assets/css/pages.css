@@ -61,10 +61,12 @@ div.content {
 }
 
 .content h1 {
-    font-size: 250%;
+    font-size: 10.0vmin;
+    line-height: 100%;
     font-weight: 900;
     margin-bottom: 3%;
-    height: 7%;
+    height: 10%;
+    width: 100%;
 }
 
 div.subcontent {
@@ -131,7 +133,7 @@ div.animation_box {
 h2.page_text {
     padding-left: 2%;
     height: 10%;
-    font-size: 175%;
+    font-size: 5vmin;
     font-weight: bold;
     overflow: hidden;
 }
@@ -141,12 +143,14 @@ p.page_text {
     height: 50%;
     padding-left: 2%;
     padding-right: 2%;
-    font-size: 1.7em;
-    line-height: 1.1em;
+    font-size: 3vmin;
+    line-height: 100%;
     font-weight: normal;
     overflow-x: hidden;
     overflow-y: auto;
     text-overflow: ellipsis;
+    text-align: justify;
+    word-break: break-word;
 }
 
 
@@ -257,6 +261,8 @@ p#contacts_text {
 #hiderTwo:hover {
     color: ghostwhite;
 }
+
+
 
 form {
     position: absolute;
