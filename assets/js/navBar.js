@@ -167,6 +167,7 @@ function build_navB() {
     text_linkedin.textContent = "LinkedIn"
     link_linkedin.appendChild(text_linkedin)
     li_t_three.appendChild(link_linkedin)
+
 //// link git
     var li_t_four = document.createElement("li")
     li_t_four.id = "contacts"
@@ -179,10 +180,30 @@ function build_navB() {
     link_git.appendChild(text_git)
     li_t_four.appendChild(link_git)
 
+//// link orcid
+    var li_t_five = document.createElement("li")
+    li_t_five.id = "contacts"
+    var link_orcid = document.createElement("a")
+    link_orcid.href = "https://orcid.org/0000-0002-0945-8304"
+    link_orcid.className = "icon "
+
+    var text_orcid = document.createElement("span", "class=\"label\"")
+    text_orcid.className = "label"
+    text_orcid.textContent = "ORCiD"
+
+    var img_orcid = document.createElement("img", "class=\"icon\"")
+    img_orcid.src="../fonts/orcid.svg"
+    img_orcid.href = "https://orcid.org/0000-0002-0945-8304"
+    img_orcid.id = "extra"
+
+    link_orcid.appendChild(img_orcid)
+    li_t_five.appendChild(link_orcid)
+
 // append to second link
     list_two.appendChild(li_t_two)
     list_two.appendChild(li_t_three)
     list_two.appendChild(li_t_four)
+    list_two.appendChild(li_t_five)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
