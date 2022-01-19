@@ -6,10 +6,10 @@
 //stamps
 var stamps_box = d3.select("#repoStampBox");
 
-links = ["https://github.com/rinikerlab/Ensembler", "https://github.com/rinikerlab/restraintmaker"]
-pic = ["../data/EnsemblerLogo_with_whiteBackround.png", "../data/RestraintMaker_logo_withoutBackground.png"]
-text = ["Ensembler", "RestraintMaker"]
-colors = [d3.rgb(256, 256, 256), d3.rgb(39, 217, 7)]
+var links = ["https://github.com/rinikerlab/Ensembler", "https://github.com/rinikerlab/restraintmaker", "https://github.com/rinikerlab/PyGromosTools"]
+var pic = ["../data/EnsemblerLogo_with_whiteBackround.png", "../data/RestraintMaker_logo_noBackground.png", "../data/PyGromosToolsBanner_small.png"]
+var text = ["Ensembler", "RestraintMaker", "PyGromosTools"]
+var colors = [d3.rgb(256, 256, 256), d3.rgb(39, 217, 7),    d3.rgb( 173, 221, 239)]
 var nstamps = links.length;
 
 for (var i = 0; i < nstamps; i++) {
@@ -22,11 +22,11 @@ for (var i = 0; i < nstamps; i++) {
     }
 
     function onhover() {
-        d3.select(this).style("visibility", "hidden")
+        d3.select(this).style("opacity", "0.0")
     }
 
     function outhover() {
-        d3.select(this).style("visibility", "visible")
+        d3.select(this).style("opacity", "0.2")
     }
 
     stamps_box.append("rect")
@@ -36,12 +36,29 @@ for (var i = 0; i < nstamps; i++) {
         .style("x", 33 * i + 5 + "%")
         .style("fill", tmp_color);
 
-    stamps_box.append("svg:image")
-        .style("height", "100%")
-        .style('width', "25%")
-        .style("position", "absolute")
-        .style("x", 33 * i + 5 + "%")
-        .attr("xlink:href", pic[i]);
+    if("" == pic[i]){
+        stamps_box.append("foreignObject")
+            .style("width", "25%")
+            .style("height", "100%")
+            .style("position", "absolute")
+            .style("y", "40%")
+            .style("x", 33 * i + 5 + "%")
+            .style("text-align", "center")
+            .style("font-size", "1.25em")
+            .style("font-weight", "bold")
+            .style("color", "black")
+            .text(text[i])
+            .attr("href", links[i])
+            .on('click', openLink);
+
+    } else {
+        stamps_box.append("svg:image")
+            .style("height", "100%")
+            .style('width', "25%")
+            .style("position", "absolute")
+            .style("x", 33 * i + 5 + "%")
+            .attr("xlink:href", pic[i]);
+    }
 
     stamps_box.append("rect")
         .style("height", "100%")
@@ -52,8 +69,8 @@ for (var i = 0; i < nstamps; i++) {
         .style("fill", d3.rgb(55, 55, 55))
         .attr("href", links[i])
         .on('click', openLink)
-        .on("mouseover", onhover)
-        .on("mouseout", outhover);
+        .on("mouseenter", onhover)
+        .on("mouseleave", outhover);
 }
 
 ////////////////////////////////////////////////////////////

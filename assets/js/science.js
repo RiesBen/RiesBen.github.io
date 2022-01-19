@@ -7,17 +7,36 @@
 var stamps_box = d3.select("#pubStampBox")
 
 //Smaller boxes
+var links = ["", "https://doi.org/10.1007/s10822-021-00436-z",  "https://doi.org/10.1021/acs.jmedchem.0c02036"]
 var colors = [d3.rgb(244, 170, 66), d3.rgb(209, 16, 41), d3.rgb(65, 157, 244)];
-var text = ["biochemistry", "informatics", "physics"]
+var text = ["Automating Distance Restraints", "Free Energies Protein Binding", "Macrocyclic Molecules"]
 var nstamps = 3;
 
 for (var i = 0; i < nstamps; i++) {
+    function openLink() {
+        var me = d3.select(this);
+        window.open(me.attr("href"))
+    }
+    function onhover() {
+        d3.select(this).style("opacity", "1.0")
+
+    }
+
+    function outhover() {
+        d3.select(this).style("opacity", "0.7")
+    }
+    if(i>0){
     var stamp_rect = stamps_box.append("rect")
         .style("width", "25%")
         .style("height", "100%")
+        .style("opacity", "0.7")
         .style("position", "absolute")
         .style("x", 33 * i + 5 + "%")
-        .style("fill", colors[i]);
+        .style("fill", colors[i])
+        .attr("href", links[i])
+        .on('click', openLink)
+        .on("mouseover", onhover)
+        .on("mouseout", outhover);
 
     var stamp_text = stamps_box.append("foreignObject")
         .style("width", "25%")
@@ -28,7 +47,32 @@ for (var i = 0; i < nstamps; i++) {
         .style("text-align", "center")
         .style("font-size", "1.75em")
         .style("font-weight", "bold")
-        .text(text[i]);
+        .text(text[i])
+        .attr("href", links[i])
+        .on('click', openLink);
+    }
+    else{
+        var stamp_rect = stamps_box.append("rect")
+            .style("width", "25%")
+            .style("height", "100%")
+            .style("opacity", "0.7")
+            .style("position", "absolute")
+            .style("x", 33 * i + 5 + "%")
+            .style("fill", colors[i])
+            .on("mouseover", onhover)
+            .on("mouseout", outhover);
+
+        var stamp_text = stamps_box.append("foreignObject")
+            .style("width", "25%")
+            .style("height", "100%")
+            .style("position", "absolute")
+            .style("y", "40%")
+            .style("x", 33 * i + 5 + "%")
+            .style("text-align", "center")
+            .style("font-size", "1.75em")
+            .style("font-weight", "bold")
+            .text(text[i]+" (submitted)");
+    }
 }
 
 //////////////////////////////////////////////////
