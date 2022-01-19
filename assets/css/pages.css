@@ -12,7 +12,7 @@ h1 h2 h3 p {
 
 h2 {
     margin-top: 3%;
-    margin-bottom: 2%;
+    margin-bottom: 0.5%;
 }
 
 /* pages */
@@ -132,7 +132,7 @@ div.animation_box {
 
 h2.page_text {
     padding-left: 2%;
-    height: 10%;
+    height: 6%;
     font-size: 5vmin;
     font-weight: bold;
     overflow: hidden;
@@ -143,13 +143,13 @@ p.page_text {
     height: 50%;
     padding-left: 5%;
     padding-right: 5%;
-    font-size: 3.2vmin;
-    line-height: 100%;
+    font-size: 3.5vmin;
+    line-height: 110%;
     font-weight: normal;
     overflow-x: hidden;
     overflow-y: auto;
     text-overflow: ellipsis;
-    text-align: justify;
+    text-align: left;
     word-break: break-word;
 }
 
