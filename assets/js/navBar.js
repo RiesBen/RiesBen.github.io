@@ -172,7 +172,7 @@ function build_navB() {
     var li_t_four = document.createElement("li")
     li_t_four.id = "contacts"
     var link_git = document.createElement("a")
-    link_git.href = "https://github.com/SchroederB"
+    link_git.href = "https://github.com/RiesBen"
     link_git.className = "icon  fa-github"
     var text_git = document.createElement("span", "class=\"label\"")
     text_git.className = "label"
