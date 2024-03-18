@@ -68,7 +68,7 @@ a:hover {
 }
 .profile h1 {
   font-size: 2.5em;
-  text-align: left;
+  text-align: center;
   font-family: "Varela Round", sans-serif;
   color: #4a4e51;
   text-transform: uppercase;
@@ -343,6 +343,7 @@ a:hover {
   justify-content: space-between;
   text-align: center;
   padding-top: 18px;
+  float: left;
 }
 .science-wrapper .sciarea ul li {
   align-items: center;
@@ -351,22 +352,19 @@ a:hover {
 .science-wrapper .sciarea ul li svg {
   width: 95%;
   fill: transparent;
-  transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
+  font-weight: 0;
 }
 .science-wrapper .sciarea ul li svg circle {
-  stroke-width: 1px;
-  stroke: #fff;
-}
-.science-wrapper .sciarea ul li svg .cbar {
-  stroke-width: 2px;
+  stroke-width: 3px;
   stroke: #66cc99;
   stroke-linecap: round;
   animation: e_circ 3.6s ease;
   -webkit-animation: e_circ 3.6s ease;
+}
+.science-wrapper .sciarea ul li svg text {
+  fill: #9099a0;
+  font-size: 0.6em;
+  font-weight: 0;
 }
 @keyframes e_circ {
   from {
@@ -376,43 +374,23 @@ a:hover {
     stroke-width: 2px;
   }
 }
-.science-wrapper .sciarea ul li span,
-.science-wrapper .sciarea ul li small {
-  top: 32%;
-  position: absolute;
-  display: block;
-  width: 100%;
-  transition-duration: 0.3s;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8em;
-}
-.science-wrapper .sciarea ul li small {
-  font-size: 0.7em;
-}
-.science-wrapper .sciarea ul li #span2 {
-  top: 32%;
-}
-.science-wrapper .sciarea ul li:hover span,
-.science-wrapper .sciarea ul li:hover small {
-  font-weight: 600;
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
-}
 .science-wrapper .sciarea ul li:hover svg {
   width: 95%;
   fill: transparent;
-  transform: rotate(-90deg);
+  transform: scale(1.2);
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
   -ms-transform: scale(1.2);
   -o-transform: scale(1.2);
+  dominant-baseline: middle;
+  text-anchor: middle;
 }
-.science-wrapper .sciarea ul li:hover .cbar {
+.science-wrapper .sciarea ul li:hover svg text {
+  fill: #9099a0;
+  font-size: 0.6em;
+  font-weight: 600;
+}
+.science-wrapper .sciarea ul li:hover svg circle {
   stroke: #66cc99;
   stroke-width: 4px;
 }
