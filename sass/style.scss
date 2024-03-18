@@ -7,7 +7,8 @@ $profileColor: #9099a0;
 $skillsColor: #9099a0;
 $linkColor: #66cc99;
 $boldColor: #4a4e51;
-$time: 3.6s;
+$time: 2.5s;
+
 
 @mixin breakpoint($point) {
   @if $point == papa-bear {
@@ -237,9 +238,17 @@ a:hover {
     }
   }
 
-  .st0,
-  .st1 {
+  svg {
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    //display:none;
+  }
+
+  .st0, .st1 {
     fill: #66cc99;
+    stroke-width: 18px;
   }
 }
 .experience {
@@ -260,7 +269,7 @@ a:hover {
     text-transform: uppercase;
     font-size: 1.2em;
     margin-bottom: 20px;
-    font-weight: 400;
+    font-weight: 600;
   }
   .company-wrapper {
     width: 30%;
@@ -352,7 +361,7 @@ a:hover {
             -webkit-animation: e_circ $time ease;
           }
           text {
-            fill: $profileColor;
+            fill: $skillsColor;
             font-size: 0.6em;
             font-weight: 0;
           }
@@ -380,7 +389,7 @@ a:hover {
           text-anchor: middle;
 
           text {
-            fill: $profileColor;
+            fill: $skillsColor;
             font-size: 0.6em;
             font-weight: 600;
           }

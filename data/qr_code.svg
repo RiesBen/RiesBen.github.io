@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="696" height="696" viewBox="0 0 696 696"><rect width="696" height="696" fill="#ffffff" x="0" y="0"/><g fill="#3d3e42">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="696" height="696" viewBox="0 0 696 696"><rect width="696" height="696" fill="none" x="0" y="0"/>
+   <style>
+        g {
+            fill: #4a4e51;
+        }
+        @media (prefers-color-scheme: dark) {
+            g { fill: #fff; }
+        }
+    </style>
+<g>
 <g transform="translate(288,48) scale(4.12)"><path d="M6,6H0V3c0-1.7,1.3-3,3-3h0c1.7,0,3,1.3,3,3V6z"/></g>
 <g transform="translate(336,48) scale(4.12)"><path d="M6,6H0V3c0-1.7,1.3-3,3-3l3,0V6z"/></g>
 <g transform="translate(360,48) scale(4.12)"><path d="M3,6H0V0l3,0c1.7,0,3,1.3,3,3v0C6,4.7,4.7,6,3,6z"/></g>

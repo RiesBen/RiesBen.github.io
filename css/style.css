@@ -237,9 +237,15 @@ a:hover {
     height: 320px;
   }
 }
-.profile .st0,
-.profile .st1 {
+.profile svg {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.profile .st0, .profile .st1 {
   fill: #66cc99;
+  stroke-width: 18px;
 }
 
 .experience {
@@ -263,7 +269,7 @@ a:hover {
   text-transform: uppercase;
   font-size: 1.2em;
   margin-bottom: 20px;
-  font-weight: 400;
+  font-weight: 600;
 }
 .experience .company-wrapper {
   width: 30%;
@@ -358,8 +364,8 @@ a:hover {
   stroke-width: 3px;
   stroke: #66cc99;
   stroke-linecap: round;
-  animation: e_circ 3.6s ease;
-  -webkit-animation: e_circ 3.6s ease;
+  animation: e_circ 2.5s ease;
+  -webkit-animation: e_circ 2.5s ease;
 }
 .science-wrapper .sciarea ul li svg text {
   fill: #9099a0;
@@ -457,23 +463,23 @@ a:hover {
 }
 .programming-wrapper .skill-percentage:nth-child(1)::before {
   width: 100%;
-  animation: skill_1 3.6s ease;
-  -webkit-animation: skill_1 3.6s ease;
+  animation: skill_1 2.5s ease;
+  -webkit-animation: skill_1 2.5s ease;
 }
 .programming-wrapper .skill-percentage:nth-child(2)::before {
   width: 25%;
-  animation: skill_2 3.6s ease;
-  -webkit-animation: skill_2 3.6s ease;
+  animation: skill_2 2.5s ease;
+  -webkit-animation: skill_2 2.5s ease;
 }
 .programming-wrapper .skill-percentage:nth-child(3)::before {
   width: 20%;
-  animation: skill_3 3.6s ease;
-  -webkit-animation: skill_3 3.6s ease;
+  animation: skill_3 2.5s ease;
+  -webkit-animation: skill_3 2.5s ease;
 }
 .programming-wrapper .skill-percentage:nth-child(4)::before {
   width: 85%;
-  animation: skill_4 3.6s ease;
-  -webkit-animation: skill_4 3.6s ease;
+  animation: skill_4 2.5s ease;
+  -webkit-animation: skill_4 2.5s ease;
 }
 .programming-wrapper .skill-percentage2 {
   margin-bottom: 10px;
@@ -497,28 +503,28 @@ a:hover {
 }
 .programming-wrapper .skill-percentage2:nth-child(1)::before {
   width: 75%;
-  animation: skill_5 3.6s ease;
-  -webkit-animation: skill_5 3.6s ease;
+  animation: skill_5 2.5s ease;
+  -webkit-animation: skill_5 2.5s ease;
 }
 .programming-wrapper .skill-percentage2:nth-child(2)::before {
   width: 70%;
-  animation: skill_6 3.6s ease;
-  -webkit-animation: skill_6 3.6s ease;
+  animation: skill_6 2.5s ease;
+  -webkit-animation: skill_6 2.5s ease;
 }
 .programming-wrapper .skill-percentage2:nth-child(3)::before {
   width: 60%;
-  animation: skill_7 3.6s ease;
-  -webkit-animation: skill_7 3.6s ease;
+  animation: skill_7 2.5s ease;
+  -webkit-animation: skill_7 2.5s ease;
 }
 .programming-wrapper .skill-percentage2:nth-child(4)::before {
   width: 45%;
-  animation: skill_8 3.6s ease;
-  -webkit-animation: skill_8 3.6s ease;
+  animation: skill_8 2.5s ease;
+  -webkit-animation: skill_8 2.5s ease;
 }
 .programming-wrapper .skill-percentage2:nth-child(5)::before {
   width: 20%;
-  animation: skill_9 3.6s ease;
-  -webkit-animation: skill_9 3.6s ease;
+  animation: skill_9 2.5s ease;
+  -webkit-animation: skill_9 2.5s ease;
 }
 
 @keyframes skill_1 {
